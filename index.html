@@ -89,6 +89,7 @@ section.leg{margin-top:80px}
 .entry{display:grid;grid-template-columns:150px minmax(0,1fr);gap:22px;padding-block:22px;border-bottom:1px solid var(--rule)}
 .meta{font-family:var(--f-data);font-size:12.5px;color:var(--muted);display:grid;gap:2px;align-content:start;font-variant-numeric:tabular-nums}
 .meta .d{color:var(--ink);font-size:14px;font-weight:500}
+.meta .tm{color:var(--track)}
 .entry h3{font-family:var(--f-head);font-weight:400;text-transform:uppercase;font-size:22px;line-height:1.12;letter-spacing:.01em;margin:0 0 4px;text-wrap:balance}
 .entry.hl h3{color:var(--track)}
 .entry .place{font-family:var(--f-display);font-style:italic;font-size:19px;color:#cfc8ba;margin:0 0 8px}
@@ -119,13 +120,13 @@ footer .bye{font-family:var(--f-display);font-style:italic;font-size:24px;color:
     <h1>INVICTUS</h1>
     <p class="sig">Brodski dnevnik · Around the World</p>
   </div>
-  <p class="lede">Od Marine Punat do Tenerifea, dan po dan s broda: susreti, kvarovi, dupini, jutarnje misli i moj prvi prelazak Atlantika.</p>
+  <p class="lede">Od Marine Punat do Tenerifea, javljanje po javljanje s broda: susreti, kvarovi, dupini, jutarnje misli i moj prvi prelazak Atlantika.</p>
   <div class="stats">
     <div class="nm"><b>3.400+ NM</b><span>prijeđeno od Punta do Tenerifea</span></div>
     <div><b>96</b><span>dana na moru (1. 8. – 4. 11. 2026.)</span></div>
     <div><b>8</b><span>zemalja pod pramcem</span></div>
     <div><b>121 NM</b><span>najduža dnevna etapa (Aguadulce – Gibraltar)</span></div>
-    <div><b>6</b><span>dana preko Atlantika</span></div>
+    <div><b>164</b><span>javljanja s broda u dnevniku</span></div>
   </div>
 </header>
 
@@ -149,7 +150,7 @@ footer .bye{font-family:var(--f-display);font-style:italic;font-size:24px;color:
   <div class="orn"><span></span></div>
   <span class="bye">Putovanje se nastavlja. Fair winds, kapetane.</span>
   <span class="sig">SY INVICTUS · Around the World</span>
-  <span>Sastavljeno iz Darkovih objava na Facebooku. Svaki zapis vodi na originalnu objavu s videom.</span>
+  <span>Sastavljeno iz Darkovih objava na Facebooku. Svako javljanje vodi na originalnu objavu s videom.</span>
 </footer>
 </div>
 
@@ -163,94 +164,190 @@ scilla:[38.25,15.72],tropea:[38.68,15.90],scalea:[39.81,15.79],positano:[40.63,1
 giglio:[42.36,10.92],elba:[42.81,10.20],capraia:[43.05,9.84],pisa:[43.67,10.27],grazie:[44.07,9.86],sestri:[44.27,9.39],portofino:[44.30,9.21],
 ilerousse:[42.64,8.94],mahon:[39.89,4.27],portopetro:[39.36,3.21],andratx:[39.54,2.39],ibiza:[38.94,1.24],altea:[38.60,-0.05],mazarron:[37.56,-1.26],
 aguadulce:[36.81,-2.57],gibraltar:[36.155,-5.335],strait:[35.95,-5.55],tangier:[35.78,-5.81],atl1:[34.3,-8.9],atl2:[32.4,-11.0],atl3:[30.6,-12.6],lanzarote:[29.0,-13.9],
-laspalmas:[28.13,-15.42],tenerife:[28.01,-16.66]};
+laspalmas:[28.13,-15.42],tenerife:[28.01,-16.66],
+split:[43.505, 16.44],hvarch:[43.255, 16.52],acharavi:[39.795, 19.815],timoni:[39.715, 19.67],gordios:[39.55, 19.795],krfjug:[39.43, 19.86],meganisi:[38.662, 20.792],atokos:[38.485, 20.81],otranto:[39.85, 18.9],occhio:[38.03, 15.64],capri:[40.56, 14.25],ischia:[40.7, 13.95],santostefano:[40.79, 13.46],tiber:[41.745, 12.225],civitavecchia:[42.09, 11.79],argentario:[42.44, 11.12],capanne:[42.77, 10.17],portovenere:[44.05, 9.835],capcorse:[42.95, 9.1],malaga:[36.55, -4.25],aldea:[27.995, -15.835]};
 const NAME={punat:"Punat",dubrovnik:"Dubrovnik",kotor:"Kotor",krf:"Krf",lefkada:"Lefkada",scilla:"Messina",positano:"Positano",ostia:"Rim (Ostia)",elba:"Elba",sestri:"Sestri Levante",ilerousse:"Korzika",mahon:"Menorca",ibiza:"Ibiza",gibraltar:"Gibraltar",tangier:"Tanger",laspalmas:"Gran Canaria",tenerife:"Tenerife",vlora:"Vlorë",leuca:"S. M. di Leuca"};
 const FB=id=>/^\d+$/.test(id)?`https://www.facebook.com/reel/${id}/`:`https://www.facebook.com/darko.slovsa/posts/${id}`;
 
 const LEGS=[
 {id:"hrvatska",n:"Hrvatska",r:"1. – 8. kolovoza",i:"Polazak iz Punta i oproštaj od Jadrana, uz više iznenadnih dočeka nego što sam ikad mogao planirati."},
-{id:"crna-gora",n:"Crna Gora",r:"8. – 11. kolovoza",i:"Moja prva strana zastava, prva carina i prvi kvar daleko od kuće."},
-{id:"albanija",n:"Albanija",r:"11. – 15. kolovoza",i:"Obala koja me iznenađivala iz dana u dan."},
+{id:"crna-gora",n:"Crna Gora",r:"9. – 11. kolovoza",i:"Moja prva strana zastava, prva carina i prvi kvar daleko od kuće."},
+{id:"albanija",n:"Albanija",r:"13. – 15. kolovoza",i:"Obala koja me iznenađivala iz dana u dan."},
 {id:"grcka",n:"Grčka",r:"15. kolovoza – 6. rujna",i:"Krf, Jonski otoci i tri tjedna u kojima je INVICTUS dobio nove solare, bateriju i pregršt mojih popravaka."},
-{id:"italija",n:"Italija",r:"6. rujna – 3. listopada",i:"Od pete čizme kroz Messinski tjesnac, Amalfi i Elbu do Ligurije."},
-{id:"korzika",n:"Korzika i otvoreno more",r:"3. – 6. listopada",i:"Sva jedra gore, pa dva i pol dana bez kopna do Menorce."},
+{id:"italija",n:"Italija",r:"6. rujna – 2. listopada",i:"Od pete čizme kroz Messinski tjesnac, Amalfi i Elbu do Ligurije."},
+{id:"korzika",n:"Korzika i otvoreno more",r:"3. – 5. listopada",i:"Sva jedra gore, pa dva i pol dana bez kopna do Menorce."},
 {id:"spanjolska",n:"Španjolska",r:"6. – 16. listopada",i:"Baleari i dug put niz obalu prema Gibraltaru, često s isplovljavanjem u tri ujutro."},
 {id:"maroko",n:"Gibraltar i Maroko",r:"16. – 24. listopada",i:"Dupini na prilazu Gibraltaru, noć među tankerima, prelazak u Afriku i tjedan u Tangeru prije oceana."},
-{id:"atlantik",n:"Atlantik",r:"24. – 29. listopada",i:"Šest dana oceana do Kanara. Poderani Batman, moja operacija usred mora i sedamdeset dupina."},
-{id:"kanari",n:"Kanarski otoci",r:"29. listopada – danas",i:"Gran Canaria, tri mjeseca od polaska i novi dani na Tenerifeu."}
+{id:"atlantik",n:"Atlantik",r:"24. – 30. listopada",i:"Šest dana oceana do Kanara. Poderani Batman, moja operacija usred mora i sedamdeset dupina."},
+{id:"kanari",n:"Kanarski otoci",r:"31. listopada – danas",i:"Gran Canaria, tri mjeseca od polaska i novi dani na Tenerifeu."}
 ];
 
-// [etapa, datum, luka, naslov, zapis, fb-id, istaknuto]
+// [etapa, datum objave, vrijeme, luka, naslov, zapis, fb-id, istaknuto, mjesto]
 const E=[
-["hrvatska","1. 8.","punat","Odvezani konopi","Nakon više od 25 godina rada, preko 30.000 operiranih pacijenata i izgradnje Poliklinike Smile, isplovljavam iz Marine Punat. Odluku je ubrzao gubitak dragih ljudi, među njima i prijatelja Damira Žića, kapetana Marine Punat.","pfbid0c4Nf2XiYRv8Q5GqNh4NTLraB2mSF8BTXuVAj97S8YDYQynw6iMmRrLiybsEP4QZTl",1,"Marina Punat"],
-["hrvatska","2. 8.","zadar","Pozdrav usred mora","Kod Zadra mi brzim brodićem dolaze mahnuti Kristijan Tominić i njegova djevojka. Nisam imao pojma da dolaze.","pfbid0pVNxJYUdXNNLSX7xSYchLNQvXauwcs9ZG23VBdcAhbKPmVrwGQMz9SQBWEQVcDLpl",0,"Kod Zadra"],
-["hrvatska","3. 8.","rogoznica","Dvaput dupini u jednom danu","Na izlazu iz Rogoznice uz brod pliva cijela obitelj dupina dok svira Tu t'en vas. Servisi u Splitu su otkazani, mijenjam plan prema Braču, a dupini se vraćaju i drugi put. Navečer jedrim prema Jelsi.","pfbid0HzBAJZQmmzVJoMAfrVxcWT2rTrWZQ4uesMCxAE25qHjk3c6xXXYFecwKCWMbsdD3l",1,"Rogoznica – Split – Hvar"],
-["hrvatska","4. 8.","jelsa","Blagoslov i doček na Lastovu","U Jelsi don Ivan Jurin blagoslivlja mene i INVICTUS i daruje mi Novi zavjet i krunicu Gospe od Zdravlja. Slijedi dan bez vjetra u kojem paluba postaje moja teretana. Navečer me u Skrivenoj Luci čeka iznenađenje: kum Dražen Galić, dr. Andrej Kravanja, dr. Andrej Božić i Bojan Galić s obiteljima.","pfbid0Vh2SP7Ckgdp7aEv14awSXa6A9VnQPeNdxKn9jFbCbyxNZyPreqRdkjuDLrCsT9vvl",0,"Jelsa – Lastovo"],
-["hrvatska","5. 8.","lastovo","Lastovo me zadržava","Danas ne isplovljavam. Ostajem zbog ljudi, a dan koristim da prvi put snimim otok dronom.","1391158946314910",0,"Skrivena Luka"],
-["hrvatska","6. 8.","sipan","Put nije utrka","S kumom Draženom plovim prema Šipanu i priznajem da pomalo odgađam odlazak iz Hrvatske. U restoranu Bowa čeka nas šampanjac koji su poslali dr. Jurković i supruga Vivian s Mykonosa, a usput stižu i dvije boce vina od Radovana Jovančevića iz Suđurđa.","pfbid0dUpy3YYPMBqtSbwA7uURf1v8oiYFSafT1NtcBiLVaRN4hX8gtisodnvLKTSNtNwml",0,"Lastovo – Šipan"],
-["hrvatska","8. 8.","dubrovnik","Zbogom, Hrvatska","U Dubrovniku me čeka rezervni propeler koji je Zlatko preusmjerio iz Splita. Posljednju večer u Hrvatskoj provodim s dubrovačkim kolegama implantolozima, a onda konopi odlaze s rive.","pfbid0rAo5CZLhUArK5eScHzWQFLokgdj5rvnv7LC7S83yqgpGoxBFEt8WDwPy7kJ7Njifl",0,"Dubrovnik"],
-["crna-gora","9. 8.","kotor","Prva strana zastava","Zelenika, prijava i carina, pa Marina Kotor. Dolazi kolega Milan Vučetić, a s njim i ekipa crnogorske nacionalne televizije.","pfbid02N2yaRqYxVvKx74swmXyYbpbadUMqi2Fwrh7iDzSLjdRobkvDK6LKpEgV8fGpMgDMl",0,"Zelenika – Kotor"],
-["crna-gora","10. 8.","budva","Sidro kod Svetog Nikole","Kratko sidrim kod Budve, uz otok od kojeg nosim nekoliko amajlija. Kava, sitni popravci i dalje.","1347106120815285",0,"Budva"],
-["crna-gora","11. 8.","bar","Plavo ispod motora","Iz Bara krećem prema Albaniji. Ujutro u motornom prostoru sve plavo: pukao je protupožarni cilindar i iscurio ispod lijevog motora. Prvi pravi servis na putu.","1056335510213326",0,"Bar – Drač"],
-["albanija","13. 8.","vlora","Prema Zelenoj obali","Plovim od Vlorë niz albansku rivijeru prema Green Coastu.","",0,"Vlorë – Dhërmi"],
-["albanija","14. 8.","palermo","Mreža na sidru i tvrđava Ali-paše","U pet ujutro sidro ne ide gore: preko noći netko je preko njega postavio neoznačenu ribarsku mrežu. Kasnije stižem u Porto Palermo, pod tvrđavu Ali-paše Tepelenskog, a nekoliko minuta dalje čekaju ostaci iz Hladnog rata.","1385914083696424",0,"Green Coast – Porto Palermo"],
-["albanija","15. 8.","saranda","Iz Sarandë na Krf","Javljam se iz posljednje albanske luke, antičkog Onchesmosa. Popodne prelazim u Grčku i prvu večer provodim u Agios Stefanosu na Krfu.","1540566891416262",0,"Sarandë – Agios Stefanos"],
-["grcka","16. 8.","ermones","Porto Timoni i Odisejeva uvala","Jutarnje kupanje kod Acharavija, Porto Timoni iz zraka, pa Ermones, uvala gdje je prema legendi more izbacilo brodolomca Odiseja.","1679346210277815",0,"Krf, zapadna obala"],
-["grcka","17. 8.","krf","673 milje","Uvala Agios Gordios usred kolovoza, a oko mene nikoga. Logbook kaže da je INVICTUS od 1. do 17. kolovoza prešao 673 nautičke milje. Popodne s Batmanom obilazim jug Krfa.","1095166999708735",1,"Agios Gordios"],
-["grcka","19. 8.","antipaxos","Nova posada","Tri delfina, piratski izletnički brod i dolazak Ursa i Kevina na brod. Na Antipaxosu ljetna gužva, a mi već skidamo prednje solare za servis u Lefkadi.","961142226849284",0,"Krf – Antipaxos"],
-["grcka","20. 8.","lefkada","Pacijent putuje sa mnom","Na putu prema Lefkadi, između jedara i alata, rješavam CT i planiranje za jednog svog pacijenta.","1379703070222000",0,"Antipaxos – Lefkada"],
-["grcka","22. 8.","sivota","Radni dani u Sivoti","Servis, popravak solara, provjera litijske baterije. Navečer upoznajem Nialla, 75-godišnjeg jedriličara koji živi na svom brodu i još uvijek radi kao skiper.","1794331608678182",0,"Sivota, Lefkas"],
-["grcka","25. 8.","kastos","Kastos na grčki način","Sidro dolje, krma konopima za stijenu. Brod perem vodom iz vlastitog watermakera, navečer restoran kod stare vjetrenjače i prvi test novog drona koji sam prati tender.","2903295106692414",0,"Meganisi – Kastos"],
-["grcka","27. 8.","ithaca","Svinje na Atokosu","Na gotovo nenaseljenom Atokosu plažom šeću svinje i kupaju se u moru. Zatim dobar vjetar do Vathyja na Itaki, gdje susjedni katamaran cijelu večer pleše na sidru, a ja dežuram.","2210484856463904",0,"Atokos – Itaka"],
-["grcka","28. 8.","sivota","Let iznad mora","Iz Fiskarda se vraćam u Sivotu i prvi put se vozim na Awake e-foilu.","28043550278643442",0,"Fiskardo – Sivota"],
-["grcka","30. 8.","sivota","Ono što se ne vidi na Instagramu","Novi prednji solari, nova litijska baterija, poliranje, Flexiteek, premještena splav za spašavanje. Dani koji ne izgledaju kao razglednica, a bez njih nema dalje.","1938564440453421",0,"Sivota"],
-["grcka","1. 9.","lefkada","Mjesec dana","Točno mjesec dana otkako sam odvezao konope. Večer provodim s Hrvatima koji svojim katamaranom krstare Grčkom.","1047406738078063",1,"Lefkas"],
-["grcka","2. 9.","lefkada","Majstor za sve","Umjesto inox nosača za ronilačke boce po 2.000 eura, dijelove dajem izrezati iz marine šperploče i sam ih ugrađujem. Usput grčki frizer i novi relej za sidro.","1108943718471602",0,"Lefkada"],
-["grcka","5. 9.","tworock","Oproštaj od Grčke","E-foil se vratio s popravka, a Urs Tanner i posada odlaze svojim putem. U kanalu Lefkade gužva od pedesetak brodova.","1066651955769298",0,"Two Rock Bay"],
-["italija","6. 9.","othonoi","Preko Otrantskih vrata","U pet ujutro dižem sidro. Kraj otoka Vida odajem počast poginulima, a onda dvadesetak sati otvorenog mora prema Italiji.","1681607776278696",0,"Othonoi – Italija"],
-["italija","7. 9.","leuca","Peta talijanske čizme","Nakon 58,5 milja i jedanaest sati jedrenja spuštam sidro u Santa Maria di Leuca. Prvo pranje soli, pa wakeboard.","1778161606524016",0,"Santa Maria di Leuca"],
-["italija","8. 9.","badolato","Najbolji dan jedrenja","114,7 nautičkih milja u 18 sati i 13 minuta, prosječno 6,3 čvora, a kroz vodu i 12,1. Noć uz plotter, radar i Sea.AI. I bubamara usred mora.","2032004450766124",1,"Jonsko more – Kalabrija"],
-["italija","9. 9.","scilla","Između Scile i Haribde","Čekam povoljnu struju u 12:20 i prolazim Messinski tjesnac. Večer provodim u Scilli ispod Castella Ruffo.","930760579581772",1,"Messinski tjesnac"],
-["italija","10. 9.","tropea","Tropea s mora","Jutro u Scilli, popodne sidro ispod Santa Maria dell'Isola u Tropei.","pfbid0mHWAmbvDSamCa6tqSenKgdzLrmR6Sx4xV7Jw543AfucAM9XSVAJJPPpz65M15n6El",0,"Scilla – Tropea"],
-["italija","11. 9.","scalea","Oluja u četiri ujutro","Alarm, udari vjetra, munje na horizontu. Sa 75 metara lanca brod drži, a ujutro krećem na sjever zaobilazeći olujne ćelije na radaru. Navečer duga završava baš iznad uvale prema kojoj plovim.","1358488619388164",0,"Tropea – Scalea"],
-["italija","14. 9.","positano","Amalfi na motoru","Prijatelj Alfonso vodi me obalom: Positano, Amalfi, Ravello, Scala. Odavde mi od 2011. dolaze pacijenti, pa mi je odlazak bio težak.","1767305847752443",0,"Amalfijska obala"],
-["italija","16. 9.","ponza","Chiaia di Luna","Kraj Ischije, otočića Santo Stefano s napuštenim zatvorom i Ventotenea plovim do Ponze. Sidro ispod bijele stijene i plaže u obliku polumjeseca.","1066392412663324",0,"Ischia – Ponza"],
-["italija","18. 9.","ostia","Morska vrata Rima","Porto Turistico di Roma u Ostiji. Sljedeći dan prolazim pokraj ušća Tibera kojim su nekoć teglenice vozile žito i amfore u Rim.","2043758706254829",0,"Ostia"],
-["italija","19. 9.","ercole","Glavno jedro opet cijelo","Popravljeno jedro napokon otvaram do kraja. Kraj Civitavecchije plovim prema Monte Argentariu i spuštam sidro ispred Porto Ercolea.","950592987475728",0,"Civitavecchia – Porto Ercole"],
-["italija","21. 9.","giglio","Giglio i Costa Concordia","Mali ribarski otok i priča od koje se ne može pobjeći: stijene Le Scole, gdje je 2012. nasukala Costa Concordia. Popodne Elba, ali umjesto gužve u Portoferraiu biram Marciana Marinu.","2151805622404774",0,"Giglio – Elba"],
-["italija","22. 9.","elba","Na vrhu Elbe","Skuterom kroz unutrašnjost, pa žičarom s otvorenim žutim košarama i pješice do vrha Monte Capanne na 1.019 metara.","1065840326288743",0,"Monte Capanne"],
-["italija","23. 9.","capraia","Capraia","Jedna luka, jedno mjesto i jedna cesta od osamsto metara. Otok koji živi svojim tempom.","pfbid0M2LCmToFEreiLEAmrL1zB148xBFM251TGYyPPigXtxzk6BPtWB2sEaZ8D2Rq5v6rl",0,"Isola di Capraia"],
-["italija","25. 9.","pisa","Pisa","Najmanji mogući vez između jedrilice i zida, a marina brod mjeri sama i naplaćuje mi ga kao duljeg nego u papirima. Autobusom do kosog tornja.","1929397458019439",0,"Marina di Pisa"],
-["italija","27. 9.","grazie","Bez izlaska na kopno","Mirni dan u Le Grazie, pa Portovenere: 45 minuta tražim mjesto za gumenjak i na kraju ne uspijem sići na kopno.","2316699115894013",0,"Le Grazie – Portovenere"],
-["italija","28. 9.","sestri","Alarm kraj Cinque Terre","Na putu prema Portofinu oglasi se alarm i skrećem u prvu uvalu. Vode u trupu srećom nema, a Sestri Levante me dočeka tako da ostajem nekoliko dana.","1102921799261212",0,"Sestri Levante"],
-["italija","30. 9.","portofino","Portus Delphini","S mora pred Portofino, luku koju su Rimljani zvali Lukom dupina. Dan poslije u Lavagni točim gorivo po 2,65 eura litra, gotovo 2.000 eura.","pfbid02SQ1upeusNUwrwx74jXwBFkYcgjc8guxHL3rHw4ua1BynWqHcEYoKqwKtJhDZkU38l",0,"Portofino"],
-["italija","2. 10.","sestri","Dva mjeseca","Ono što je u Puntu bila samo linija na karti sad su dva mjeseca mog života.","1879821102989528",1,"Sestri Levante"],
-["korzika","3. 10.","ilerousse","Samo mi i vjetar","Sidro dižem u 02:54. Gotovo 17 sati i 104,5 milja do Korzike, prvi put sva jedra otvorena i motori ugašeni.","2378458389352110",1,"Sestri Levante – Île Rousse"],
-["korzika","5. 10.","atl0","275 milja do Menorce","Zbog lošeg vremena oko Korzike odustajem od Ajaccia i okrećem prema otvorenom moru. Pred noć otkrivam da radar ne radi.","2045291262838676",0,"Sredozemlje"],
-["spanjolska","6. 10.","mahon","Menorca","Nakon dva i pol dana bez kopna: tanker u mraku, satima grmljavina i mala ptica koja se usred oluje sklonila na INVICTUS. U zoru se pojavljuju svjetla Mahóna.","1000020643113848",1,"Mahón"],
-["spanjolska","8. 10.","mahon","Dva pijetla","Mahón ima dva pijetla koji su podijelili grad na istok i zapad. Na brodu sam napokon popravio konop glavnog jedra.","950769237627323",0,"Mahón"],
-["spanjolska","9. 10.","portopetro","Ispred dvije oluje","U četiri ujutro isplovljavam iz Mahóna dok se sa sjevera približavaju dva olujna područja. Do Porto Petra na Mallorci, sutra Port d'Andratx.","1475086424440111",0,"Mallorca"],
-["spanjolska","11. 10.","ibiza","Cala Tarida","Cijeli dan plovidbe do Ibize i mirna pješčana uvala na kraju.","2583183745752294",0,"Ibiza"],
-["spanjolska","12. 10.","altea","Možeš me usporiti","Četrnaest sati za samo 67 milja: vjetar, valovi i struja u nos. Sljedeći dan mijenjam taktiku i isplovljavam u 03:48.","799964153211770",0,"Altea – Mazarrón"],
-["spanjolska","14. 10.","aguadulce","Prije nevremena","Isplovljavam u 02:27 pod zvijezdama da stignem u marinu Aguadulce prije najavljene oluje. Dva dana u marini i sređivanje plotera.","2739166833205064",0,"Aguadulce"],
-["maroko","16. 10.","gibraltar","Pratnja prema Gibraltaru","U pet ujutro, još na ostacima nevremena, izvlačim se iz Aguadulcea. Valovi i struja guraju me prema Gibraltaru, a usred plovidbe pojavljuje se deset do petnaest dupina koji se igraju oko oba pramca.","1756073112360512",1,"Aguadulce – Gibraltar"],
-["maroko","17. 10.","gibraltar","Noć među tankerima","U četiri ujutro, nakon 19 sati i 121 milje, obilazim Gibraltarsku stijenu u mraku i slalomom između pedesetak tankera dolazim do sidrišta La Línea. Slijede komarci, majmuni, policija, preskakanje ograda i birokracija zbog koje bih najradije opet pobjegao na pučinu.","5556284634596170",1,"La Línea, Gibraltar"],
-["maroko","18. 10.","strait","Afrika!","Bez papira koji danima nisam uspio dobiti dižem sidro i po kiši prelazim Gibraltarski tjesnac, provlačeći se između divova od nekoliko stotina metara. Mislim i na orke. Nakon sat i pol ispred pramca je Afrika, a pokraj mene mirno prolazi marokanski vojni brod.","1392194362961314",1,"Gibraltarski tjesnac – Tanger"],
-["maroko","19. 10.","tangier","Kiša u Africi","Budim se uz kišu i odgađam obilazak grada. Umjesto toga satima čekam marinera i INVICTUS od 24 tone premještam u boks, gdje se brod vezuje sasvim drugačije nego na Mediteranu.","1150161064031929",0,"Tanger"],
-["maroko","20. 10.","tangier","Vodič bez zajedničkog jezika","Dogovorio sam vodiča koji govori engleski, njemački ili talijanski, a stigao je onaj koji ne govori nijedan. Prevodimo mobitelom s arapskog na francuski pa na engleski, a on me vodi na tržnicu koju sam već vidio. Usput me hvata i prehlada.","2631388870662878",0,"Tanger"],
-["maroko","21. 10.","tangier","Dan s ARGOM","Budim se po hrvatskom vremenu, s curenjem nosa i boli u grlu, pa dan provodim na brodu. Radim na ARGO AI sustavu koji sada povezuje vjetar, valove, struje i otvorena jedra kako bi mi savjetovao kada skratiti jedra.","2079467569379773",0,"Tanger"],
-["maroko","23. 10.","tangier","Tanger","Nakon nekoliko dana kiše i prehlade napokon sunce. Stara medina i marokanski Beverly Hills.","1687834116213369",0,"Tanger"],
-["atlantik","24. 10.","atl1","Atlantik, prvi dan","Posljednja marokanska carina u 07:00, pa pramac prema Kanarima. Štapovi u moru, a navečer Mjesec izlazi s jedne strane dok sunce tone u ocean s druge.","1829373944921368",1,"Tanger – ocean"],
-["atlantik","25. 10.","atl2","Operacija Batman","Već prve noći poderao mi se Batman, moje najveće jedro od oko 320 m². Kirurški instrumenti, konac i šivanje usred oceana. Jedro je opet gore, a dan donosi i 70 dupina.","880210561780907",1,"Između Afrike i Kanara"],
-["atlantik","26. 10.","atl2","Kad ocean utihne","Vjetar pada na šest čvorova, a zakrpani Batman i dalje gura gotovo 24 tone broda.","1838237323859325",0,"Atlantik, treći dan"],
-["atlantik","27. 10.","atl3","Mali gost i novi rekordi","Pravo atlantsko jedrenje sa skraćenim Batmanom. Sutradan bonaca i još dvjesto milja do Kanara.","1442427604510532",0,"Atlantik, četvrti dan"],
-["atlantik","28. 10.","lanzarote","Putnica","Na brod slijeće mala, umorna ptica. Odmara se u mojim rukama i odleti dalje.","1462817505712922",0,"Kod Lanzarotea"],
-["atlantik","29. 10.","laspalmas","Kraj etape","Dan bez vjetra koristim za ARGA, svog brodskog AI asistenta koji prati motore. Stižem u Las Palmas.","1124283953680201",1,"Gran Canaria"],
-["kanari","31. 10.","laspalmas","Nautičke trgovine","Dan za opremu i popravke, toliko vrećica da bi mi trebao još jedan član posade.","1149760050822655",0,"Las Palmas"],
-["kanari","1. 11.","tenerife","Tri mjeseca","Noćna plovidba s Gran Canarije na Tenerife, mala oluja i besana noć. Osvrćem se na tri mjeseca i jednu odluku iza koje je cijeli moj život, a ispod objave stiže 68 toplih poruka.","1123391220283428",1,"Gran Canaria – Tenerife"],
-["kanari","2. 11.","tenerife","Robot ispod trupa","Čekam vez pred Marinom del Sur. S Kevinom kava, pa ronilačko odijelo i Keelcrab, podvodni robot koji čisti trupove.","1131109375980444",0,"Las Galletas"],
-["kanari","3. 11.","tenerife","Od robota do irskog puba","Sat vremena pod vodom umorio me više nego šest dana Atlantika. Večer završava u irskom pubu.","2618944291877259",0,"Las Galletas, Tenerife"],
-["kanari","4. 11.","tenerife","Metoda za lijene","Pokušavam Keelcrab upravljati izvana, ali u marini koja se ljulja to baš ne ide, pa perem sol s paluba. Tri puta odlazim na recepciju samo da čujem ono što sam već znao: 5. studenoga moram napustiti marinu. Brod je gotovo spreman, samo me Iridium i dalje ne pronalazi satelite.","28392005643806409",0,"Las Galletas, Tenerife"]
+["hrvatska","1. 8.","10:09","punat","Odvezani konopi","Nakon više od 25 godina rada, preko 30.000 operiranih pacijenata i izgradnje Poliklinike Smile, isplovljavam iz Marine Punat. Odluku je ubrzao gubitak dragih ljudi, među njima i prijatelja Damira Žića, kapetana Marine Punat.","pfbid02fRrqeZ5ATTM5uo3Y1uau6sag5EHVLRBzZAptXoSMoBBs6fpyzAKRn5JacnpbXTmhl",1,"Marina Punat"],
+["hrvatska","2. 8.","12:02","zadar","Pozdrav usred mora","Kod Zadra mi brzim brodićem dolaze mahnuti Kristijan Tominić i njegova djevojka. Nisam imao pojma da dolaze.","pfbid02tLpfVDQTNqeTL9SBUJm7Vjka5QbSAQ56iBT9EMVbRUvrgqs4kim5LKggRBtUc3nTl",0,"Kod Zadra"],
+["hrvatska","3. 8.","06:00","rogoznica","Dupini me ispraćaju","Na izlazu iz Rogoznice iz mora izranja cijela obitelj dupina i neko vrijeme plovi uz INVICTUS, baš dok svira Tu t'en vas. Kao mali pozdrav mora na početku velikog putovanja.","pfbid02MqcsVELbdTd6XzYhAcxiixwuyMa4YvhgddQAPq3yu69KTpfRVohjjhYZDQVPrhkyl",1,"Rogoznica"],
+["hrvatska","3. 8.","10:23","split","Dupini, drugi put","U Splitu su mi otkazali servise i bio sam razočaran, pa sam okrenuo pramac prema Braču. A onda opet dupini, drugi put u istom danu.","1035403229214114",0,"Split – Brač"],
+["hrvatska","3. 8.","16:26","hvarch","Jedrenje prema Jelsi","Kratko javljanje s jedrima gore, na putu prema Jelsi na Hvaru.","1726261451943191",0,"Hvarski kanal"],
+["hrvatska","4. 8.","09:46","jelsa","Blagoslov u Jelsi","Don Ivan Jurin dolazi na brod blagosloviti mene i INVICTUS. Na rastanku mi daruje Novi zavjet i krunicu Gospe od Zdravlja, koji će biti sa mnom cijelim putem.","pfbid02ZYU9Zn8aXuRF2QEmXTenkUjT2vUuRzMAmAKAqdjTisy2CrBde4Uw3R8kxUumhmVbl",0,"Jelsa"],
+["hrvatska","4. 8.","12:53","jelsa","Teretana na palubi","Dan bez vjetra, motori rade, more ravno. Da ne poludim od monotonije, paluba postaje teretana: sklekovi, trbušnjaci i trčanje po brodu.","1347010187539517",0,"Na putu prema Lastovu"],
+["hrvatska","4. 8.","22:54","lastovo","Doček u Skrivenoj Luci","Očekivao sam mirnu uvalu i noć na sidru, a na obali me čekaju kum Dražen Galić, dr. Andrej Kravanja, dr. Andrej Božić i Bojan Galić s obiteljima. Večer koju neću zaboraviti.","pfbid0334FJYPxXiD1KQG8VgjyxqiJzrw3woovUmWCoKCqgnJUzhcCtMr1ZGsxTLTb7t54wl",0,"Skrivena Luka, Lastovo"],
+["hrvatska","5. 8.","13:19","lastovo","Lastovo me zadržava","Danas ne isplovljavam. Ostajem zbog ljudi, a dan koristim da prvi put snimim otok dronom.","1391158946314910",0,"Skrivena Luka, Lastovo"],
+["hrvatska","6. 8.","06:19","lastovo","Put nije utrka","Rano ujutro krećem s Lastova prema Šipanu i priznajem da pomalo odgađam odlazak iz Hrvatske. Na ovoj etapi pridružuje mi se kum Dražen Galić.","pfbid02hLGgEDUDCe72MAof6VnhEfuxA5BnreE5FE6mpoCsjyVcQhqeMzzAyhjMC4UhzAgFl",0,"Lastovo – Šipan"],
+["hrvatska","6. 8.","17:53","sipan","Suze zahvalnosti","Radovan Jovančević iz Suđurđa šalje nam dvije boce vina, a u restoranu Bowa čeka šampanjac od dr. Jurkovića i supruge Vivian. Onda mi kći prijatelja dr. Andrije Božića stavlja narukvicu za sreću i sretan povratak, i tu više ne mogu zadržati suze.","pfbid02wDhKr8HBmHzGka65Mtd2h8EysoiTTZvaNtsoN1TZCHiyT6H6Ap3iG1wKutkYvBWxl",0,"Šipan, restoran Bowa"],
+["hrvatska","8. 8.","06:46","dubrovnik","Odvezujem konope i odlazim iz Hrvatske","Jučer sam iz Slanog stigao u Dubrovnik, gdje me čekao rezervni propeler koji je Zlatko preusmjerio iz Splita. Večer s kolegama implantolozima dr. Miroslavom Kordom i dr. Varisom Krehićem, a sad konopi odlaze s rive.","pfbid02v2EnPEGXKfnWYY17LojXqi4VsguNex6XjoqeWzoX4osv3Z7Kqa9H3exVpKQPQPYbl",1,"Dubrovnik"],
+["crna-gora","9. 8.","14:14","kotor","Prva strana zastava","Zelenika, prijava i carina, pa Marina Kotor i kolega Milan Vučetić. Iznenađenje je ekipa crnogorske nacionalne televizije, koju su nazvali ljudi što prate moje putovanje.","pfbid0J1Nrx2MPq6XZ4dW32iY6BMgCbcTnLc7F3keUGY6gxFzpzcsPFdMUfX5YfqUzmvdJl",1,"Zelenika – Kotor"],
+["crna-gora","10. 8.","11:06","budva","Sidro kod Svetog Nikole","Kratko sidrim kod Budve, uz otok od kojeg nosim nekoliko amajlija. Kava, sitni popravci i dalje.","1347106120815285",0,"Budva"],
+["crna-gora","11. 8.","06:37","bar","Doviđenja, Crna Goro","Iz Bara krećem prema Albaniji. Odlazim pun emocija, posebno zbog druženja s dr. Milanom Vučetićem, Darkom Mrvošem i dr. Igorom Ristićem.","1056335510213326",0,"Bar"],
+["crna-gora","11. 8.","08:10","bar","Plavo ispod motora","Na jutarnjem pregledu motora sve je plavo: na protupožarnom cilindru puklo je kućište i tekućina je iscurila ispod lijevog motora. Gasim motore i pumpicama čistim prostor.","1365843409009524",0,"Na putu prema Albaniji"],
+["albanija","13. 8.","14:44","vlora","Prema Zelenoj obali","Kratko javljanje s plovidbe od Vlorë prema Green Coastu.","27528487740186786",0,"Vlorë – Dhërmi"],
+["albanija","14. 8.","07:25","green","Mreža na sidru","U pet ujutro sidro ne ide gore: preko noći netko je preko njega postavio neoznačenu ribarsku mrežu. Oslobađam je, ribe ostavljam vlasniku, a usput mi izbaci osigurač sidrenog vitla.","1385914083696424",0,"Green Coast"],
+["albanija","14. 8.","13:22","green","Dan koji se pamti","Iz Vlore plovim s prijateljem dr. Ergysom Camijem i njegovom kćeri Efom. Kajgana i tost za doručak, puno jedrenja i još više smijeha.","1357844386540063",0,"Vlorë – Green Coast"],
+["albanija","14. 8.","17:47","palermo","Tvrđava i podmornički tunel","Porto Palermo, uvala pod tvrđavom koja se veže uz Ali-pašu Tepelenskog. Nekoliko minuta dalje u stijenu je ukopan golemi podmornički tunel iz vremena Envera Hoxhe.","2308108319929182",0,"Porto Palermo"],
+["albanija","14. 8.","19:58","palermo","Porto Palermo iz zraka","Tvrđava, tirkizno Jonsko more i INVICTUS usidren ispod nje, snimljeni dronom.","2508515122978226",0,"Porto Palermo"],
+["albanija","15. 8.","06:01","saranda","Jutarnja misao","Sloboda nije uvijek bijeg od nečega. Ponekad je to samo odluka da napokon počneš živjeti život koji želiš.","1540566891416262",0,"Sarandë"],
+["albanija","15. 8.","08:47","saranda","Posljednja albanska luka","Javljam se iz Sarandë, antičkog Onchesmosa, kamo brodovi dolaze više od 2.000 godina. Sidro ispred luke, lučka kapetanija na kanalu 11 i odjava iz Albanije, a onda pramac prema Grčkoj.","1624766405928596",0,"Sarandë"],
+["grcka","15. 8.","15:20","krf","Planovi za Krf","Kratko javljanje s planovima do utorka, kad se vraćam u grad Krf.","1751264522664906",0,"Krf"],
+["grcka","15. 8.","17:13","stefanos","Prva večer u Grčkoj","Stižem u Agios Stefanos na Krfu: male plaže, brodice na sidru i taverne uz more. Spuštam dinghy i idem potražiti dobru grčku tavernu.","927635873724151",1,"Agios Stefanos, Krf"],
+["grcka","16. 8.","05:32","stefanos","Jutarnja misao","Ne mora svaki korak biti isplaniran. Ponekad treba krenuti, vjerovati sebi i vidjeti kamo će te put odvesti.","1679346210277815",0,"Agios Stefanos, Krf"],
+["grcka","16. 8.","08:48","acharavi","Jutarnje kupanje","Prva stanica je plaža Acharavi: sidro, skok u kristalno Jonsko more i dalje prema Porto Timoniju.","27798507513145148",0,"Acharavi, Krf"],
+["grcka","16. 8.","13:04","timoni","Porto Timoni","Dvije tirkizne uvale leđa uz leđa ispod sela Afionas. Do njih nema ceste, a ja dolazim s mora i ostatak priče prepuštam dronu.","4702185473390877",0,"Porto Timoni, Krf"],
+["grcka","16. 8.","17:42","ermones","Odisejeva uvala","Agios Georgios me nije privukao, pa sam nastavio do Ermonesa. Prema legendi ovdje je more izbacilo brodolomca Odiseja, kojeg je pronašla Nausikaja.","1067807642404909",0,"Ermones, Krf"],
+["grcka","17. 8.","05:40","ermones","Jutarnja misao","Godinama sam čekao pravi trenutak. Odlasci dragih ljudi naučili su me da vrijeme ne čeka, a oni na neki način plove sa mnom.","1095166999708735",0,"Ermones, Krf"],
+["grcka","17. 8.","09:03","gordios","Prazna uvala usred kolovoza","Agios Gordios, duga pješčana plaža i stijena Ortholithi, a oko INVICTUSA nikoga. Dinghyjem idem po kavu i u supermarket.","1746295926499192",0,"Agios Gordios, Krf"],
+["grcka","17. 8.","13:23","gordios","673 milje","Iz logbooka sam izvukao točan odgovor: od 1. do 17. kolovoza INVICTUS je prešao 673 nautičke milje kroz četiri države. Samo jedan dan nisam napravio nijednu milju, kad sam ostao na Lastovu.","827774633695698",1,"Krf"],
+["grcka","17. 8.","17:00","krfjug","Glavno jedro i Batman","Vjetar odostraga, a INVICTUS klizi s glavnim jedrom i Batmanom oko juga Krfa prema istočnoj obali. Plan za večer: mala uvala i dobra taverna.","1415980513785468",0,"Jug Krfa"],
+["grcka","18. 8.","06:26","krf","Jutarnja misao","More brzo objasni da neke stvari nisu u tvojim rukama. Ne biram vjetar ni valove, ali biram kako ću na njih reagirati.","1099847799246337",0,"Krf"],
+["grcka","18. 8.","13:16","krf","Najava obilaska uživo","Na vašu želju za pola sata idem uživo na Facebooku i pokazujem vam brod, a vi pitajte što vas zanima.","1058228067086674",0,"Krf"],
+["grcka","18. 8.","18:08","krf","INVICTUS TOUR","Napokon obilazak broda koji ste toliko tražili: 21 minuta kroz unutrašnjost, kokpit, flybridge, elektroniku, jedra i strojarnicu, s titlovima na talijanskom i engleskom.","1098629046157159",0,"Krf"],
+["grcka","19. 8.","06:56","krf","Jutarnja misao","Mislio sam da ću najviše pamtiti mjesta, a već sada vidim da će najljepše uspomene biti ljudi.","961142226849284",0,"Krf"],
+["grcka","19. 8.","08:58","krf","Nova posada","Jučer tri delfina uz brod, piratski izletnički brod i dolazak Ursa i Kevina, nove posade INVICTUSA. Dan smo završili šetnjom i večerom u gradu Krfu.","1784535359351431",0,"Krf"],
+["grcka","19. 8.","13:52","antipaxos","Mala flota na Antipaxosu","Stižemo na Antipaxos: nestvarno more, ali i prava ljetna gužva. Usput skidamo prednje solare za servis u Lefkadi, a uz nas su i Ursovi katamarani Tamiro i Azul.","2857468374623666",0,"Antipaxos"],
+["grcka","20. 8.","06:16","antipaxos","Jutarnja misao","Hrabrost nije trenutak kad strah nestane, nego kad ga prihvatiš i ipak odvežeš konope.","1379703070222000",0,"Antipaxos"],
+["grcka","20. 8.","11:10","lefkada","Pacijent putuje sa mnom","Na putu prema Lefkadi, između jedara i alata, rješavam CT i planiranje za jednog svog pacijenta.","1422284216410291",0,"Antipaxos – Lefkada"],
+["grcka","21. 8.","07:17","lefkada","Jutarnja misao","Na moru ne možeš požuriti vjetar. Polako učim da čekanje nije izgubljeno vrijeme.","2931435120545512",0,"Lefkada"],
+["grcka","22. 8.","07:17","sivota","Jutarnja misao","Dugo sam živio za još jedan posao i još jedan cilj. U jednom trenutku moraš sebi reći dosta, ne zato što odustaješ, nego zato što želiš više od života.","1794331608678182",0,"Sivota, Lefkas"],
+["grcka","22. 8.","11:06","sivota","Radni dani u Sivoti","Servis, popravak solara i provjera litijske baterije. Navečer novo poznanstvo s divnim 75-godišnjim jedriličarem.","1578498823670197",0,"Sivota, Lefkas"],
+["grcka","23. 8.","06:36","sivota","Jutarnja misao","Sve manje mislim da bogatstvo čine stvari, a sve više vrijeme, ljudi i trenuci koji postaju uspomene.","3540258332818229",0,"Sivota, Lefkas"],
+["grcka","23. 8.","16:02","lefkada","Testna vožnja","Novi solari su postavljeni, Batman otvoren i testna vožnja u tijeku. Sutra nastavljamo s popravcima.","1095290009856481",0,"Lefkada"],
+["grcka","24. 8.","06:42","sivota","Niall, 75 godina","U Sivoti sam upoznao Nialla, koji je nakon velikih promjena u životu doplovio do Grčke, živi na brodu i još radi kao skiper. Podsjetio me da nikad nije prekasno.","3186077871740937",0,"Sivota, Lefkas"],
+["grcka","24. 8.","17:01","nydri","Kratko u Nydriju","Kratko stajanje u zaštićenoj uvali punoj brodova da pokupimo još nekoliko stvari za INVICTUS.","1739876380565053",0,"Nydri, Lefkas"],
+["grcka","25. 8.","06:03","meganisi","Jutarnja misao","Rano jutro na brodu, bez buke i telefona. Možda mir nije mjesto na koje trebamo stići.","2903295106692414",0,"Meganisi"],
+["grcka","25. 8.","14:53","kastos","Kastos na grčki način","Sidro dolje, krma konopima za stijenu. INVICTUS je danas praonica: vodom iz watermakera perem ljepilo zaostalo od radova na solarima, a navečer slijedi restoran kod stare vjetrenjače.","1694454135163958",0,"Kastos"],
+["grcka","25. 8.","17:13","kastos","Tender i novi dron","Malo zabave s tenderom od 30 konja i prvi pravi test novog drona koji nas sam prati dok jurimo po moru.","979917511771958",0,"Kastos"],
+["grcka","26. 8.","06:02","kastos","Jutarnja misao","Jučer predvečer bonaca i trenuci u kojima se ništa nije događalo. Ne mora svaki trenutak imati svrhu.","2598428740599155",0,"Kastos"],
+["grcka","27. 8.","06:15","ithaca","Dežurstvo na Itaki","Dosta vjetra i dobro jedrenje do Vathyja na Itaki. Navečer susjedni katamaran pleše na sidru dok mu je posada u gradu, pa umjesto druženja dežuram.","2210484856463904",0,"Vathy, Itaka"],
+["grcka","27. 8.","17:31","atokos","Svinje na Atokosu","Na gotovo nenaseljenom Atokosu plažom šeću i kupaju se svinje. Nakon kratkog druženja s lokalnim stanovništvom slijedi nekoliko sati pravog jedrenja do Itake.","1613490840353459",0,"Atokos"],
+["grcka","28. 8.","06:02","fiskardo","Jutarnja misao","Volim trenutak kad sunce izađe iznad horizonta. Jučer je iza nas, a danas još možemo nešto promijeniti.","28043550278643442",0,"Fiskardo, Kefalonija"],
+["grcka","28. 8.","14:10","sivota","Let iznad mora","Stižemo u Sivotu i prvi put stajem na Awake e-foil. Kratka vožnja kroz uvalu, gotovo kao let.","1698638221225822",0,"Sivota, Lefkas"],
+["grcka","29. 8.","06:14","sivota","Jutarnja misao","Na e-foilu se prvo boriš za ravnotežu, a onda se daska podigne i letiš. Ne saznaš koliko možeš dok ne pokušaš.","1796592715113671",0,"Sivota, Lefkas"],
+["grcka","30. 8.","06:06","sivota","Ono što se ne vidi na Instagramu","Novi prednji solari, nova litijska baterija, poliranje, Flexiteek, premještena splav za spašavanje. Dani koji ne izgledaju kao razglednica, a bez njih nema dalje.","1938564440453421",0,"Sivota, Lefkas"],
+["grcka","31. 8.","06:28","lefkada","Stati da bih išao dalje","INVICTUS ostaje još nekoliko dana u Grčkoj. Ne gledam koliko sam milja već mogao napraviti, nego koliko ću spreman krenuti dalje.","2514427292397891",0,"Lefkada"],
+["grcka","1. 9.","06:42","lefkada","Mjesec dana","Točno mjesec dana otkako sam odvezao konope. Večer s Tomislavom Zelićem i Danijelom Giergijom i njihovim obiteljima, Hrvatima koji krstare Grčkom. Danijel i sam sanja put oko svijeta.","1047406738078063",1,"Lefkada"],
+["grcka","2. 9.","07:05","lefkada","Majstor za sve","Umjesto inox nosača za ronilačke boce po 2.000 eura, dao sam izrezati dijelove iz marine šperploče i sam ih ugrađujem.","1108943718471602",0,"Lefkada"],
+["grcka","3. 9.","07:40","lefkada","Nova odjeća za gumenjak","Gumenjak dobiva zaštitu preko tubusa, a ja konačno grčkog frizera. Manje zabavan dio je natezanje sa servisom u Ateni oko Awake boarda.","1600977038272032",0,"Lefkada"],
+["grcka","4. 9.","06:22","lefkada","Dan na brodu","Ugrađujem držače za ronilačke boce, popravljam relej sidra i stavljam automatski osigurač, uz dio koji mi je poslao Kristijan Kamenar. Dvije klime čekaju servisera.","1817159619706193",0,"Lefkada"],
+["grcka","4. 9.","08:08","lefkada","Polako dalje","Krećem iz Lefkasa prema prvom sidrištu južno, dok čekam da se e-foil vrati iz Atene. Onda pravac Italija.","4471708506424394",0,"Lefkada"],
+["grcka","5. 9.","06:53","tworock","Oproštaj od prijatelja","Board je napokon stigao s popravka. Opraštam se od Ursa Tannera i posade te Jean-Marca i supruge, a u kanalu Lefkade pedesetak brodova čeka da se otvori most.","1066651955769298",0,"Two Rock Bay"],
+["grcka","6. 9.","05:48","othonoi","Posljednji dan u Grčkoj","U pet ujutro dižem sidro i plovim prema Krfu. Kraj otoka Vida tiho odajem počast ljudima koji su ondje izgubili život nakon povlačenja preko Albanije, a dan završavam na Othonoiju.","1681607776278696",0,"Krf – Othonoi"],
+["italija","6. 9.","07:57","otranto","Italija sve bliže","Negdje na sredini mora, još dvadesetak sati do Italije. Mirno more i prekrasan dan.","2888185131555155",1,"Otrantska vrata"],
+["italija","7. 9.","10:36","leuca","Peta talijanske čizme","Nakon 58,5 milja i jedanaest sati jedrenja stigao sam u Santa Maria di Leuca. Prvo pranje soli, a onda napokon wakeboard koji se vratio s popravka, i radi.","1778161606524016",1,"Santa Maria di Leuca"],
+["italija","7. 9.","13:18","leuca","Batman u punom","Nastavljam prema jugu Italije s Batmanom otvorenim do kraja. Sunce, vjetar i more pred nama.","964836029974677",0,"Jonsko more"],
+["italija","8. 9.","05:18","badolato","Noćna plovidba","Karta, Sea.AI, radar, pogled u mrak i dobra glazba. Noću manje vidiš, ali više pratiš i osjećaš.","2032004450766124",0,"Kod Badolata, Kalabrija"],
+["italija","8. 9.","08:20","badolato","Najbolji dan jedrenja","114,7 nautičkih milja u 18 sati i 13 minuta, prosječno 6,3 čvora, a kroz vodu i 12,1. I bubamara nasred pučine.","1777696410090231",1,"Jonsko more – Kalabrija"],
+["italija","9. 9.","09:43","occhio","Čekam struju","Čekam povoljnu struju za prolaz kroz Messinski tjesnac, koja prema sjeveru kreće oko 12:20. Ovdje su, prema Homeru, mornare čekale Scila i Haribda.","930760579581772",0,"Pred Messinskim tjesnacem"],
+["italija","9. 9.","18:28","scilla","Scila i Haribda su iza mene","Prošao sam Messinski tjesnac i ostajem u Scilli. Idem prošetati i posjetiti Castello Ruffo.","1730121494708343",1,"Scilla"],
+["italija","10. 9.","06:38","scilla","Odisejevim putem","Jučer sam INVICTUSOM prošao istim prolazom kojim je morao proći Odisej, između Haribde i Scile. Dan koji ću dugo pamtiti.","pfbid02pezMPdGqUCUcT2wM8jS3Guhh8kgSLqRVd39fT3usjEaJQ9Ez7HxbsWD6ySBK2hvkl",0,"Scilla"],
+["italija","10. 9.","08:50","scilla","Scilla iza legende","Iza priče o čudovištu pronalazim prekrasno malo mjesto: Castello Ruffo, stepenice do mora, crkvicu i uske uličice starog mjesta.","1785239309331927",0,"Scilla"],
+["italija","10. 9.","14:24","tropea","Tropea s mora","Sidro ispod Santa Maria dell'Isola. Na kopno još nisam zakoračio, zasad samo uživam u pogledu.","1793773785283179",0,"Tropea"],
+["italija","11. 9.","06:23","tropea","Oluja u četiri ujutro","Bonaca i lijepa večer u gradu, a oko četiri ujutro alarm: jak vjetar, munje i val. Sa 75 metara lanca brod drži, a uz mene je ostao samo jedan veliki jedrenjak.","1358488619388164",0,"Tropea"],
+["italija","11. 9.","16:43","scalea","Zaobilazim olujne ćelije","Nakon burne noći plovim na sjever na dva motora i prednjem jedru, prateći olujne ćelije na radaru. Danas nema romantike, samo što prije do sigurnog utočišta.","1105024448642893",0,"Prema Scalei"],
+["italija","11. 9.","17:44","scalea","Sigurnost na moru","Kad ploviš sam, prvo moraš pomoći sam sebi. Pokazujem opremu koja je uvijek uz mene: samonapuhavajući prsluk, sigurnosni pojas s tetherom i AIS MOB odašiljač.","1574860874322560",0,"Kalabrija"],
+["italija","12. 9.","06:56","scalea","Duga","Nakon oluje cijeli dan tražim sigurno sidrište, a predvečer se pojavi duga koja završava baš u uvali prema kojoj plovim.","1398574948903923",0,"Scalea"],
+["italija","12. 9.","17:20","positano","Pred Positanom","Stižem pred Positano, jedan od najljepših bisera Italije, gdje imam puno prijatelja i pacijenata. Čekaju me lijepi dani.","4478326929104175",0,"Positano"],
+["italija","13. 9.","07:37","positano","Doček u Positanu","Prijatelji su mi uspjeli nabaviti mjesto među desecima brodova. Za pet minuta stižu Alfonso, Stefano i Andrea, skidamo gumenjak zbog oštećenog nosača, a onda čaša šampanjca i Positano.","1584740190001495",0,"Positano"],
+["italija","13. 9.","14:09","positano","Uspomena na Thaija","Facebook mi je izbacio uspomenu od prije osam godina: moj engleski buldog Thai, prvi pas u mom životu. Vjerujem da ću negdje na ovom putu naići na novog Thaija.","4048362215299859",0,"Positano"],
+["italija","14. 9.","07:58","positano","Amalfi na motoru","Prijatelj Alfonso vozi me obalom i pokazuje mi svoju Amalfijsku obalu: Positano, Amalfi, Ravello, Scala.","1767305847752443",0,"Amalfijska obala"],
+["italija","15. 9.","07:05","positano","Jače nego prije","Nosač gumenjaka stradao je u oluji. Sa Stefanom Rossijem idem u malu obiteljsku radionicu u Castellammare di Stabia, gdje za dva sata naprave nove, jače inox dijelove.","1063389603130613",0,"Positano"],
+["italija","15. 9.","13:30","capri","Teška srca iz Positana","Napuštam Positano, prolazim kraj Li Galli, otoka Sirena, i Caprija i polako nastavljam na sjever.","1088041286934765",0,"Li Galli – Capri"],
+["italija","16. 9.","07:02","ischia","S druge strane","Od 2011. iz Positana mi dolaze pacijenti i operirao sam ih između 200 i 300. Ovaj put sam ja ušao u njihov svijet, i zato je odlazak bio težak.","1066392412663324",0,"Prema Ischiji"],
+["italija","16. 9.","10:20","santostefano","Kraj starog zatvora","Ischia je iza mene. Prolazim pokraj otočića Santo Stefano s napuštenim zatvorom starim više od 200 godina i Ventotenea, prema Ponzi.","2119329581999310",0,"Santo Stefano – Ventotene"],
+["italija","16. 9.","16:53","ponza","Chiaia di Luna","Sidro ispod ogromne bijele stijene i plaže u obliku polumjeseca, koja je zbog odrona zatvorena s kopna. Ponekad je najbolji plan ostati.","1345310084348826",0,"Ponza"],
+["italija","17. 9.","07:02","ponza","Vlasnik koji odmara","U malom obiteljskom restoranu vlasnik, kad se posao smiri, stavi jastuk na stol i odmara. Možda zna nešto što smo mi zaboravili.","2923423034679157",0,"Ponza"],
+["italija","18. 9.","07:16","ostia","Morska vrata Rima","Zbog najavljenog nevremena idem u Porto Turistico di Roma u Ostiji. Vez s vodom i strujom stoji 110 eura dnevno, gotovo tri puta manje od jedne noći u Slanom.","2043758706254829",0,"Ostia"],
+["italija","19. 9.","06:29","ostia","Mali poslovi","Dan bez velikih avantura, ali s puno sitnih popravaka. Još tražim odakle dolazi slana voda u lijevoj kaljuži, a glavno jedro sam napokon popravio.","950592987475728",0,"Ostia"],
+["italija","19. 9.","10:46","tiber","Ušće Tibera","Prolazim pokraj ušća Tibera, kojim su prije dvije tisuće godina teglenice vozile žito, vino, ulje i mramor do Rima.","1679065780232173",0,"Ušće Tibera"],
+["italija","19. 9.","14:30","civitavecchia","Glavno jedro opet cijelo","Napokon jedrim s prednjim i potpuno otvorenim glavnim jedrom. Civitavecchia s kruzerima ostaje s desne strane, a ja nastavljam prema Orbetellu.","1436167955099466",0,"Kod Civitavecchije"],
+["italija","20. 9.","07:00","ercole","Jedrilica u zalasku","Predvečer spuštam sidro ispred Porto Ercolea, a malo prije kraj mene prolazi prekrasna jedrilica pod punim jedrima, okupana večernjim suncem.","1610447647493521",0,"Porto Ercole"],
+["italija","20. 9.","15:16","giglio","Prema Gigliju","Porto Ercole i Porto Santo Stefano su lijepi, ali preveliki za ono što tražim. Plovim prema malom otoku Giglio, s pričom od Etruščana i Barbarosse do Coste Concordije.","2032160347440757",0,"Monte Argentario – Giglio"],
+["italija","21. 9.","07:00","giglio","Spomenik na Gigliju","Posjećujem spomenik poginulima s Coste Concordije, koja je 2012. udarila u stijene Le Scole, samo 90 metara od obale. Od 4.229 ljudi na brodu, 32 nisu preživjela.","2151805622404774",0,"Giglio"],
+["italija","21. 9.","13:34","argentario","Monte Argentario iz zraka","Krug oko poluotoka koji s mora izgleda kao otok: Forte Filippo, Cala Galera, Rocca Spagnola i luke pune brodova.","1075579068661877",0,"Monte Argentario"],
+["italija","21. 9.","17:15","elba","Promjena plana na Elbi","Portoferraio je pun trajekata i gužve, pa produžujem do Marciana Marine, malog mjesta između mora i zelenih brda.","1111460918234693",0,"Marciana Marina, Elba"],
+["italija","22. 9.","08:22","elba","Napoleonov otok","Elba je otok na koji je 1814. u egzil stigao Napoleon, čovjek kojem se pripisuje rečenica da nemoguće nije francuski.","1065840326288743",0,"Marciana Marina, Elba"],
+["italija","22. 9.","16:12","capanne","Na vrhu Elbe","Skuterom kroz unutrašnjost, pa žičarom s otvorenim žutim košarama i pješice do vrha Monte Capanne na 1.019 metara.","1788339085747916",0,"Monte Capanne"],
+["italija","23. 9.","07:25","elba","Perspektiva","S vrha Monte Capannea more izgleda beskrajno, a s mora planina ogromna. Tako je i u životu, ovisi odakle gledaš.","pfbid02Qsmux8j56BgnRYp6ey9wd6kD17ATF8SUosSFNnT2B2VGKSWg2jWmnUyfRmsTXyS6l",0,"Elba"],
+["italija","23. 9.","10:37","elba","Elba u tri minute","Video s dva dana na Elbi. Došao sam zbog Napoleona, a odlazim znajući da je on samo mali dio otoka.","2981713532165711",0,"Elba"],
+["italija","24. 9.","06:47","capraia","Jednostavnost","Na Capraiji jedna cesta od 800 metara vodi od luke do mjesta. Prolazim njome polako, bez cilja i bez gledanja na sat.","1066846556129260",0,"Capraia"],
+["italija","24. 9.","19:18","capraia","Capraia","Jedna luka, jedno mjesto, uske ulice i nijedan veliki hotel. Biciklom do gornjeg dijela mjesta, do pogleda na more zbog kojih stalno staješ.","1981492822448529",0,"Capraia"],
+["italija","25. 9.","06:49","pisa","Prilagodba","Ulazak u Marinu di Pisa i najmanje moguće mjesto između jedrilice i zida. Dok plovim, otvaram CT-e pacijenata i imam online sastanke, pa sam na trenutak opet doktor.","1929397458019439",0,"Marina di Pisa"],
+["italija","26. 9.","07:20","pisa","Nesavršenost","Marina mi je sama izmjerila brod i naplatila ga kao duljeg. Autobusom do kosog tornja, pogreške koju ljudi dolaze vidjeti iz cijelog svijeta, dok mi svoje pogreške skrivamo.","1779290979941229",0,"Pisa"],
+["italija","27. 9.","07:21","grazie","Grad ronilaca","Le Grazie mi se činio mirnim, ali ništa posebnim, a onda sam otkrio da je to Città dei Palombari, grad ronilaca, s rimskom vilom, lazaretom i Napoleonovom bazom. Ponekad vidimo samo površinu.","2316699115894013",0,"Le Grazie"],
+["italija","27. 9.","07:28","grazie","Le Grazie","Mirni dan u zaštićenoj uvali blizu Portovenerea. Biciklom uz rivu i palme, pa isti prizor s mora.","1623450352569651",0,"Le Grazie"],
+["italija","28. 9.","07:06","portovenere","Bez izlaska na kopno","Plan je bio jednostavan: sidro ispred Portovenerea i gumenjakom u grad. Ali 45 minuta tražim gdje ostaviti gumenjak i ne uspijem sići na kopno.","1093628373257670",0,"Portovenere"],
+["italija","28. 9.","13:14","portovenere","Portovenere s mora","Šarene kuće, uske ulice i crkva na stijeni. Ovaj put ga upoznajem samo s mora, uz malo razočaranja.","1727148812749328",0,"Portovenere"],
+["italija","29. 9.","07:12","sestri","Alarm kraj Cinque Terre","Na putu prema Portofinu oglasi se alarm za vodu u brtvi desnog pogona i skrećem u prvu veliku uvalu. Nisam izabrao gdje ću stati, ali našao sam razlog da ostanem.","1102921799261212",0,"Sestri Levante"],
+["italija","29. 9.","12:38","sestri","Sestri Levante","Vode u trupu nema. Ljudi mi odmah naprave mjesto za gumenjak, a čekaju me šetnica, plaže i male talijanske ulice.","1797576804895235",0,"Sestri Levante"],
+["italija","30. 9.","07:00","sestri","Tri zemlje, jedan brod","Ideju mi je dao Kruno Kapetanović iz hotela Navis u Opatiji, koji je napravio mol za goste s mora. Kad živiš na brodu, takav mol ti je parking, pa uspoređujem Hrvatsku, Grčku i Italiju iz perspektive nautičara.","pfbid0NrNiuVHWXM1mcuiHWocLRQCjHkUjtQwbJoQTX21GdJT8iEWNqRMnnKCtbToL59Jdl",0,"Sestri Levante"],
+["italija","30. 9.","14:43","portofino","Portus Delphini","Pred Portofinom, koji su Rimljani zvali Lukom dupina. Posebno mi se svidjela priča o konzulu Brownu, koji je 1867. ugledao tvrđavu s broda i kupio je.","1438988211490618",0,"Portofino"],
+["italija","1. 10.","07:04","sestri","Snovi imaju cijenu","U Lavagni točim dizel po 2,65 eura litra, gotovo 2.000 eura ukupno. Od Krfa do sjevera Italije potrošio sam oko 70 % goriva.","2379432069537459",0,"Sestri Levante"],
+["italija","1. 10.","18:22","sestri","Moja mala Copacabana","Drugi dio Sestri Levantea: duga plaža i zgrade uz more koje me na trenutak odvedu u Brazil.","1127514076380519",0,"Sestri Levante"],
+["italija","2. 10.","07:00","sestri","Dva mjeseca","Gotovo mi je promaknula obljetnica: dva mjeseca otkako sam isplovio iz Punta. Linija na karti postala je dva mjeseca mog života.","1879821102989528",1,"Sestri Levante"],
+["korzika","3. 10.","13:51","capcorse","Nikad ne putuješ sam","U 02:30 dižem sidro u Sestri Levanteu, još neodlučan između Francuske i Korzike. Mislim na Srđana Perkića iz Udina, kod kojeg su stizali paketi za INVICTUS, od nove kamere do dijela za sidreno vitlo.","2378458389352110",0,"Između Italije i Korzike"],
+["korzika","3. 10.","14:57","capcorse","Samo mi i vjetar","Na pučini između Italije i Korzike napokon su sva jedra otvorena. Nema motora ni buke, samo more uz trup.","2298377080950340",1,"Između Italije i Korzike"],
+["korzika","3. 10.","17:32","ilerousse","Arrivederci Italia, bonjour Corsica","Hvala, Italija. Batman leti, INVICTUS grabi prema Korzici: nova zastava i novo poglavlje.","1789819021964316",1,"Korzika"],
+["korzika","4. 10.","07:07","ilerousse","104,5 milja do Korzike","Iz Sestri Levantea krenuo sam u 02:54 i nakon gotovo 17 sati i 104,5 milja spustio sidro na Korzici. Pomalo je neobično nakon toliko vremena spustiti talijansku zastavu.","28568003019489631",0,"Île Rousse, Korzika"],
+["korzika","5. 10.","08:17","atl0","275 milja do Menorce","Zbog lošeg vremena oko Korzike odustajem od Ajaccia i okrećem prema otvorenom moru. Pred noć otkrivam da radar ne radi.","2045291262838676",0,"Sredozemlje"],
+["spanjolska","6. 10.","07:21","atl0","Noć munja","Gotovo cijeli dan jedrim s vjetrom s boka, a od sedam navečer kiša i grmljavina cijelu noć. Najviše se bojim munje, pa sam prije puta ugradio sustav zaštite od udara. Pišem još s mora, ali s malim društvom.","1000020643113848",0,"Između Korzike i Menorce"],
+["spanjolska","6. 10.","15:14","mahon","Menorca, we made it","Nakon dva i pol dana otvorenog mora, tankera u mraku i satima munja, ujutro se pojavljuju svjetla Mahóna. Mala ptica koja se sklonila na brod odradila je sa mnom posljednju stražu.","4486339891608360",1,"Mahón, Menorca"],
+["spanjolska","7. 10.","07:40","mahon","Dobro jutro iz Mahóna","Lijepo je opet hodati po zemlji. Napokon sam našao zašto ulazi slana voda: kaljužna pumpa i crijevo vraćali su je u brod, pa ugrađujem novu pumpu.","28550953027905999",0,"Mahón, Menorca"],
+["spanjolska","8. 10.","07:08","mahon","Ekspres lonac i prognoza","Popravio sam konop glavnog jedra i prvi put kuhao u ekspres loncu. Onda prognoza: dvije olujne zone s 35 do 45 čvorova, pa odlučujem u četiri ujutro krenuti prema Mallorci.","950769237627323",0,"Mahón, Menorca"],
+["spanjolska","8. 10.","16:04","mahon","Dva pijetla","Mahón ima dva pijetla, jedan vlada istočnim, drugi zapadnim dijelom grada. Mislim da znam tko je ovdje pravi gradonačelnik.","1762067371677909",0,"Mahón, Menorca"],
+["spanjolska","9. 10.","06:49","portopetro","Između dvije oluje","Iz Mahóna krećem kroz meteorološki koridor između dva područja jakog vjetra i gotovo cijelim putem jedrim. Porto Petro me podsjeća na uvale Sejšela.","1475086424440111",0,"Porto Petro, Mallorca"],
+["spanjolska","10. 10.","07:00","andratx","Veliki servis motora","U Port d'Andratxu marinero me čeka gumenjakom i za 41 euro sve je riješeno. Kako sam stigao rano, radim veliki servis oba Yanmara na 888 radnih sati.","2260333308149537",0,"Port d'Andratx, Mallorca"],
+["spanjolska","11. 10.","07:00","ibiza","Njemačka svadba u Cala Taridi","Na plaži u Cala Taridi njemačka svadba s ogromnim zvučnicima. Ja otvaram strop salona i tražim zašto se moja tri Raymarine plotera stalno blokiraju.","2583183745752294",0,"Cala Tarida, Ibiza"],
+["spanjolska","12. 10.","07:00","altea","Možeš me usporiti","Četrnaest sati za samo 67 milja: vjetar, valovi i struja u nos. Predvečer napokon zaklon u uvali L'Albir kraj Alteje.","799964153211770",0,"L'Albir, Altea"],
+["spanjolska","13. 10.","07:00","mazarron","Nova taktika","Isplovljavam u 03:48 dok more spava i radim 88,1 milju, 21 više nego dan prije. Vjetra nema cijeli dan, pa motori troše gorivo.","1858466768670016",0,"Puerto de Mazarrón"],
+["spanjolska","14. 10.","08:15","aguadulce","Prije nevremena","U 02:27 isplovljavam pod zvijezdama da stignem u marinu Aguadulce prije najavljene oluje. Noćne plovidbe me podsjete koliko smo slijepi na moru, unatoč radaru, AIS-u i termalnoj kameri.","2739166833205064",0,"Aguadulce"],
+["spanjolska","15. 10.","07:45","aguadulce","Dan bez plovidbe","INVICTUS je sigurno privezan, a ja šetam plažama i doručkujem za 4 eura. Kupujem rezervnu pumpu za pitku vodu, jer bez nje ne radi nijedan od četiri watermakera.","1488178953152874",0,"Aguadulce"],
+["spanjolska","16. 10.","07:00","aguadulce","Dan za elektroniku","Sređujem Raymarine plotere, instaliram Windy, PredictWind i Spotify i popravljam AIS. Malo više povjerenja u opremu prije Atlantika.","1756073112360512",0,"Aguadulce"],
+["maroko","16. 10.","19:00","malaga","Pratnja prema Gibraltaru","Usred plovidbe prema Gibraltaru pojavljuje se deset do petnaest dupina i igra se oko oba pramca. Predstava koju nijedan Netflix ne može nadmašiti.","1454310163265684",1,"Kod Málage"],
+["maroko","17. 10.","07:00","malaga","Surfanje prema Gibraltaru","Jučer u pet ujutro napuštam Aguadulce, uz ostatke nevremena. Valovi i struja guraju me prema Gibraltaru, a jedan dupin dolazi sasvim blizu i gleda me ravno u oči.","1143324508286303",0,"Aguadulce – Gibraltar"],
+["maroko","18. 10.","07:38","gibraltar","Noć među tankerima","U četiri ujutro, nakon 19 sati i 121 milje, obilazim Gibraltarsku stijenu u mraku i slalomom između pedesetak tankera dolazim do sidrišta La Línea. Slijede komarci, majmuni, policija, preskakanje ograda i birokracija.","5556284634596170",1,"La Línea, Gibraltar"],
+["maroko","18. 10.","10:59","gibraltar","Sidro gore, prema Africi","Po kiši se provlačim između tankera iz zaljeva. Nisam riješio svu dokumentaciju, mislim na orke, a pred pramcem je novi kontinent.","1466947508623776",0,"Gibraltar"],
+["maroko","19. 10.","07:43","strait","Afrika!","Prelazim Gibraltarski tjesnac, provlačeći se između divova od nekoliko stotina metara. Nakon sat i pol ispred pramca je Afrika, a marokanski vojni brod mirno prolazi pokraj mene.","1392194362961314",1,"Gibraltarski tjesnac – Tanger"],
+["maroko","20. 10.","09:27","tangier","Kiša u Africi","Budim se uz kišu i odgađam obilazak grada. Umjesto toga satima čekam marinera i INVICTUS od 24 tone premještam u boks, gdje se brod vezuje sasvim drugačije nego na Mediteranu.","1150161064031929",0,"Tanger"],
+["maroko","21. 10.","07:39","tangier","Vodič bez zajedničkog jezika","Dogovorio sam vodiča koji govori engleski, njemački ili talijanski, a stigao je onaj koji ne govori nijedan. Prevodimo mobitelom s arapskog na francuski pa na engleski, a on me vodi na tržnicu koju sam već vidio.","2631388870662878",0,"Tanger"],
+["maroko","22. 10.","07:09","tangier","Dan s ARGOM","Budim se po hrvatskom vremenu, s curenjem nosa i boli u grlu, pa dan provodim na brodu. Radim na ARGO AI sustavu koji sada povezuje vjetar, valove, struje i otvorena jedra kako bi mi savjetovao kada skratiti jedra.","2079467569379773",0,"Tanger"],
+["maroko","23. 10.","07:00","tangier","Tri lica Tangera","Novi vodič Abdul govori savršen engleski i godinama je vodio brzi katamaran između Španjolske i Maroka. Pokazuje mi staru medinu i marokanski Beverly Hills.","1687834116213369",0,"Tanger"],
+["maroko","24. 10.","07:00","tangier","Upozorenje u trgovini","Posljednji dan u Tangeru. U nautičkoj trgovini vidim izloženo kormilo katamarana koje su orke odlomile u veljači 2025., samo sedam milja od Tangera, i to dan prije mog isplovljavanja.","1829373944921368",0,"Tanger"],
+["atlantik","24. 10.","16:31","atl1","Atlantik","Kratko javljanje s Atlantika: Batman na pola, glavno jedro otvoreno, pramac prema Kanarima i štapovi u moru.","2377898589615403",1,"Atlantski ocean"],
+["atlantik","24. 10.","19:51","atl1","Mjesec i sunce","S jedne strane izlazi Mjesec, s druge sunce tone u Atlantik. Ne govorim ništa.","955758000586906",0,"Atlantski ocean"],
+["atlantik","25. 10.","07:31","atl1","Atlantik, prvi dan","Carinici dolaze sat i pol kasnije, desetak minuta pregledavaju brod i napokon adio Maroko. Još jednom kroz Gibraltarski tjesnac, uz marokansku obalu.","880210561780907",0,"Tanger – ocean"],
+["atlantik","25. 10.","10:44","atl2","Batman je opet u akciji","Spustio sam Batmana, uzeo kirurške instrumente i konac i pokrpao poderotinu. Jedro je opet gore i radi, a oko mene je horizont pun brzih tankera.","4566373800308147",0,"Između Afrike i Kanara"],
+["atlantik","26. 10.","07:00","atl2","Operacija Batman","Prve noći donji rub Batmana, jedra od 320 m² tvrtke OneSails, zapeo je i rasparao se na gotovo tri metra. Usred oceana sam ga zašio, a dan su obilježila i 70 dupina.","1838237323859325",1,"Atlantski ocean"],
+["atlantik","27. 10.","07:00","atl2","Kad ocean utihne","Moj pacijent se odlično oporavlja: šavovi drže, a Batman i pri šest čvorova vjetra gura gotovo 24 tone broda brzinom od oko četiri čvora.","1442427604510532",0,"Atlantik, treći dan"],
+["atlantik","28. 10.","06:45","atl3","Mali gost i novi rekordi","Napokon pravo atlantsko jedrenje sa skraćenim Batmanom, oko 20 % manje površine, s vjetrom odostraga i valovima od metar do dva.","2316524949167820",0,"Atlantik, četvrti dan"],
+["atlantik","28. 10.","12:50","atl3","Dani na oceanu","Gotovo bonaca, ali Batman i dalje vuče oko četiri čvora; još 200 milja do Kanara. Dani prolaze uz satelitsku televiziju, knjigu, poslove na brodu i malo vježbanja.","1442473881162588",0,"Atlantski ocean"],
+["atlantik","29. 10.","07:00","lanzarote","Kad vjetar uzme slobodno","Batman hvata i najmanji dašak vjetra, a onda oko 15 sati potpuna bonaca. Zatvaram jedro i palim jedan motor, a ribe skaču oko broda i ignoriraju moj mamac.","1462817505712922",0,"Atlantik, peti dan"],
+["atlantik","29. 10.","09:36","lanzarote","Putnica","Na brod slijeće mala, umorna ptica. Odmara se u mojim rukama i odleti dalje.","1151477407438581",0,"Kod Lanzarotea"],
+["atlantik","30. 10.","07:45","laspalmas","Kraj etape","Dan bez vjetra koristim da s ARGOM izmjerim najekonomičniju vožnju na motor: jedan motor na 2000 okretaja daje oko 4,9 čvorova uz 3,4 do 3,5 litara na sat. Stižem u Las Palmas.","1124283953680201",1,"Las Palmas, Gran Canaria"],
+["kanari","31. 10.","08:13","laspalmas","Od industrijske luke do nautičkog raja","Noć pred lukom bila je nemirnija od oceana. Batman ide na profesionalni popravak u tvrtku Alisios, a dan prolazi u nautičkim trgovinama.","1149760050822655",0,"Las Palmas, Gran Canaria"],
+["kanari","1. 11.","08:57","aldea","Tri mjeseca","Točno tri mjeseca od Punta. Noću plovim s Gran Canarije prema Tenerifeu i odgovaram onima koji misle da sam rođen sa zlatnom žlicom.","1123391220283428",1,"Gran Canaria – Tenerife"],
+["kanari","1. 11.","13:02","tenerife","68 poruka i besana noć","Hvala na više od 68 poruka. Prvi studenoga mi nikad nije bio lak zbog uspomena na ljude kojih nema, pa sam sinoć u 22 sata isplovio, a ispred luke me dočekao osvijetljeni putnički brod, kao da mi pokazuje put.","1059801730407121",0,"Tenerife"],
+["kanari","2. 11.","07:50","tenerife","Tenerife","Sidrim ispred Marine del Sur dok se ne oslobodi vez, a s marinerom se sporazumijem talijanskim iz ordinacije. Pregled nakon nevremena: nema nikakve štete.","1131109375980444",0,"Las Galletas, Tenerife"],
+["kanari","2. 11.","15:48","tenerife","Robot ispod trupa","Kava s Kevinom, pa ronilačko odijelo i Keelcrab, podvodni robot kojim čistim alge i školjkice s trupova.","1683258559810279",0,"Las Galletas, Tenerife"],
+["kanari","3. 11.","07:55","tenerife","Od robota do irskog puba","Sat vremena pod vodom umorio me više nego šest dana Atlantika. Večer završava u irskom pubu.","2618944291877259",0,"Las Galletas, Tenerife"],
+["kanari","4. 11.","09:38","tenerife","Metoda za lijene","Pokušavam Keelcrab upravljati izvana, ali u marini koja se ljulja to baš ne ide, pa perem sol s paluba. Saznajem da 5. studenoga moram napustiti marinu, a Iridium i dalje ne pronalazi satelite.","28392005643806409",0,"Las Galletas, Tenerife"]
 ];
 P.atl0=[40.9,6.6];
 
@@ -271,9 +368,9 @@ LEGS.forEach(L=>{
   const s=document.createElement("section");s.className="leg";s.id=L.id;
   s.innerHTML=`<div class="leg-head"><span class="eyebrow">${L.r}</span><h2>${L.n}</h2><p>${L.i}</p></div>`;
   E.filter(e=>e[0]===L.id).forEach(e=>{
-    const [,d,k,t,txt,fb,hl,pl]=e,c=P[k];
-    const el=document.createElement("article");el.className="entry"+(hl?" hl":"");el.id="z-"+d.replace(/\D/g,"-");el.dataset.port=k;
-    el.innerHTML=`<div class="meta"><span class="d">${d} 2026.</span><span>${dm(c[0],1)}</span><span>${dm(c[1],0)}</span></div>
+    const [,d,tm,k,t,txt,fb,hl,pl]=e,c=P[k];
+    const el=document.createElement("article");el.className="entry"+(hl?" hl":"");el.id="z-"+(d+tm).replace(/\D+/g,"-");el.dataset.port=k;
+    el.innerHTML=`<div class="meta"><span class="d">${d} 2026.</span><span class="tm">${tm}</span><span>${dm(c[0],1)}</span><span>${dm(c[1],0)}</span></div>
       <div><h3>${t}</h3><p class="place">${pl}</p><p class="s">${txt}</p>${fb?`<a class="src" href="${FB(fb)}" target="_blank" rel="noopener">Originalna objava ↗</a>`:""}</div>`;
     s.appendChild(el);
   });
@@ -327,7 +424,7 @@ const S=[
 ["Scilla",38.255,15.715,"9. – 10. 9.","9.9",1],
 ["Tropea",38.68,15.895,"10. – 11. 9.","10.9",2],
 ["Scalea",39.81,15.79,"11. 9.","11.9",2],
-["Positano",40.628,14.485,"14. – 15. 9.","14.9",1],
+["Positano",40.628,14.485,"12. – 15. 9.","12.9",1],
 ["Santo Stefano",40.79,13.46,"16. 9.","16.9",3],
 ["Ponza",40.89,12.955,"16. – 17. 9.","16.9",2],
 ["Porto Turistico di Roma",41.735,12.265,"18. 9.","18.9",1],
