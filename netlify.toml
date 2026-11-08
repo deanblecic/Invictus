@@ -1,12 +1,13 @@
-# Stranica se sada objavljuje na GitHub Pages; Netlify adresa samo preusmjerava.
+# Stranica se objavljuje na Cloudflare Pages (sy-invictus.pages.dev) i GitHub Pages; Netlify adresa samo preusmjerava.
 [build]
   publish = "."
   command = ""
-  # Netlify više ne objavljuje nove verzije (preusmjeravanje ostaje); svaka objava trošila bi kredite.
-  ignore = "exit 0"
+  # Netlify objavljuje samo kad se promijeni ova datoteka (npr. adresa preusmjeravanja);
+  # nove objave dnevnika ne pokreću Netlify i ne troše kredite.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- netlify.toml"
 
 [[redirects]]
   from = "/*"
-  to = "https://deanblecic.github.io/Invictus/:splat"
+  to = "https://sy-invictus.pages.dev/:splat"
   status = 301
   force = true
