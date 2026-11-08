@@ -2,6 +2,8 @@
 [build]
   publish = "."
   command = ""
+  # Netlify više ne objavljuje nove verzije (preusmjeravanje ostaje); svaka objava trošila bi kredite.
+  ignore = "exit 0"
 
 [[redirects]]
   from = "/*"
