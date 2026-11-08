@@ -1,3 +1,10 @@
+# Stranica se sada objavljuje na GitHub Pages; Netlify adresa samo preusmjerava.
 [build]
   publish = "."
   command = ""
+
+[[redirects]]
+  from = "/*"
+  to = "https://deanblecic.github.io/Invictus/:splat"
+  status = 301
+  force = true

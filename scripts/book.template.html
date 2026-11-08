@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brodski dnevnik INVICTUS</title>
+<meta name="description" content="Brodski dnevnik SY INVICTUS: put oko svijeta katamaranom, dan po dan, kao knjiga koja se lista.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Knjiga: tamni brodski dnevnik u Darkovom stilu. Svaki dan je jedan dvostruki list:
+   lijevo datum i javljanja, desno video odabranog javljanja. Na mobitelu jedno ispod drugog. */
+:root{
+  --night:#07090d; --paper:#14171d; --paper2:#181c23; --ink:#f3efe7; --soft:#d9d3c7; --muted:#9a9890; --rule:#2a2f37;
+  --gold:#e8a23e; --gold-soft:rgba(232,162,62,.14);
+  --f-head:"Archivo Black","Arial Black",Impact,sans-serif;
+  --f-classic:"Cinzel","Trajan Pro",Georgia,serif;
+  --f-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:radial-gradient(120% 80% at 50% 0%,#11151c 0%,var(--night) 60%);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;min-height:100vh;
+  padding:env(safe-area-inset-top,0px) max(14px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px))}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.top{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-block:14px}
+.brand{font-family:var(--f-classic);letter-spacing:.24em;font-size:13px;text-transform:uppercase;margin-right:auto;text-decoration:none}
+.brand b{font-weight:600;color:var(--gold)}
+.tb{font-family:var(--f-body);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:transparent;border:1px solid var(--rule);border-radius:2px;padding:7px 11px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.tb:hover{border-color:var(--gold);color:var(--gold)}
+select.tb{appearance:none;background:var(--paper)}
+
+.book{max-width:1180px;margin:0 auto;perspective:2200px}
+.spread{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"head media" "list media";background:var(--paper);border:1px solid var(--rule);box-shadow:0 30px 80px rgba(0,0,0,.55);min-height:min(78vh,760px);position:relative;transform-origin:50% 50%}
+.spread::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:46px;margin-left:-23px;pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.38) 48%,rgba(255,255,255,.04) 52%,rgba(0,0,0,0) 100%)}
+.head,.list{padding:30px 44px 0 40px;min-width:0}
+.list{padding-bottom:30px}
+.media{grid-area:media;background:var(--paper2);padding:30px 40px 30px 44px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.head{grid-area:head}.list{grid-area:list}
+.run{display:flex;justify-content:space-between;gap:12px;font-family:var(--f-classic);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule);padding-bottom:10px}
+.run .leg{color:var(--gold)}
+.date{display:grid;grid-template-columns:auto 1fr;column-gap:16px;align-items:end;margin-top:22px}
+.date .dn{font-family:var(--f-head);font-size:clamp(64px,9vw,104px);line-height:.82;color:var(--ink)}
+.date .mo{font-family:var(--f-display);font-style:italic;font-size:clamp(24px,3vw,32px);line-height:1.05}
+.date .wd{font-family:var(--f-data);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);grid-column:1/-1;margin-top:12px}
+.places{font-family:var(--f-display);font-style:italic;font-size:21px;color:var(--soft);margin:8px 0 0;text-wrap:balance}
+.coord{font-family:var(--f-data);font-size:12px;color:var(--muted);margin-top:4px}
+.ent{padding:18px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:58px minmax(0,1fr);gap:14px}
+.ent:last-of-type{border-bottom:0}
+.ent .tm{font-family:var(--f-data);font-size:13px;color:var(--gold);padding-top:4px}
+.ent h3{font-family:var(--f-head);font-weight:400;font-size:19px;line-height:1.15;text-transform:uppercase;margin:0 0 2px;text-wrap:balance}
+.ent.hl h3{color:var(--gold)}
+.ent .pl{font-family:var(--f-display);font-style:italic;font-size:17px;color:#cfc8ba;margin:0 0 6px}
+.ent p.t{margin:0;color:#e6e1d7;font-size:16.5px}
+.ent .act{margin-top:8px;display:flex;gap:10px;flex-wrap:wrap}
+.chip{font-family:var(--f-classic);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);background:none;border:0;border-bottom:1px solid var(--rule);padding:2px 0;cursor:pointer;text-decoration:none}
+.chip:hover,.chip.on{color:var(--gold);border-color:var(--gold)}
+.ent.sel{background:linear-gradient(90deg,var(--gold-soft),transparent 70%);margin-inline:-14px;padding-inline:14px}
+blockquote{margin:26px 0 0;padding:22px 18px;border:1px solid var(--rule);background:linear-gradient(180deg,#0f1218,#171b22);text-align:center}
+blockquote q{quotes:none;font-family:var(--f-display);font-style:italic;font-weight:600;font-size:24px;line-height:1.2;display:block}
+blockquote cite{display:block;margin-top:8px;font-family:var(--f-data);font-style:normal;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+.player{position:relative;width:100%;max-width:380px;margin:0 auto;aspect-ratio:9/16;background:#000;border:1px solid var(--rule);overflow:hidden}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted);font-family:var(--f-display);font-style:italic;font-size:20px}
+.cap{max-width:380px;margin:0 auto;width:100%;display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.cap b{font-family:var(--f-head);font-weight:400;font-size:14px;text-transform:uppercase;letter-spacing:.02em}
+.cap span{font-family:var(--f-data);font-size:12px;color:var(--gold)}
+.tabs{max-width:380px;margin:0 auto;width:100%;display:flex;gap:6px;flex-wrap:wrap}
+.tab{font-family:var(--f-data);font-size:12px;border:1px solid var(--rule);background:none;border-radius:2px;padding:4px 8px;cursor:pointer}
+.tab.on,.tab:hover{border-color:var(--gold);color:var(--gold)}
+.mnote{max-width:380px;margin:0 auto;font-size:13px;color:var(--muted);text-align:center}
+.mnote a{color:var(--soft)}
+
+.nav{max-width:1180px;margin:14px auto 0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px}
+.nav button{background:none;border:1px solid var(--rule);border-radius:2px;padding:10px 14px;cursor:pointer;font-family:var(--f-body);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;min-height:44px}
+.nav button:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+.nav button:disabled{opacity:.3;cursor:default}
+.nav .prev{justify-self:start}.nav .next{justify-self:end}
+.nav .pg{font-family:var(--f-data);font-size:12px;color:var(--muted);text-align:center}
+.nav .pg b{color:var(--ink);font-weight:500}
+
+/* naslovnica */
+.spread.cover{grid-template-areas:"head media";grid-template-rows:1fr}
+.cover .head{grid-area:head;padding:0;display:grid}
+.sky{position:relative;overflow:hidden;height:100%;min-height:520px;padding:clamp(40px,7vw,70px) 26px;text-align:center;display:grid;align-content:center;justify-items:center;gap:14px;
+  background:radial-gradient(60% 38% at 68% 74%,rgba(255,196,110,.55),rgba(255,160,70,0) 70%),linear-gradient(180deg,#07090d 0%,#141a24 30%,#3a2a24 55%,#a8602a 74%,#e3a050 79%,#20160f 80%,#0b0a09 100%)}
+.sky::after{content:"";position:absolute;left:0;right:0;top:80%;height:20%;background:repeating-linear-gradient(180deg,rgba(255,190,110,.10) 0 2px,transparent 2px 7px)}
+.orn{width:min(240px,60%);height:10px;position:relative}
+.orn::before,.orn::after{content:"";position:absolute;top:4px;width:44%;height:1px;background:rgba(243,239,231,.6)}
+.orn::before{left:0}.orn::after{right:0}
+.orn span{position:absolute;left:50%;top:1px;width:7px;height:7px;transform:translateX(-50%) rotate(45deg);border:1px solid rgba(243,239,231,.7)}
+.verse{font-family:var(--f-classic);font-size:clamp(13px,1.8vw,17px);letter-spacing:.14em;line-height:1.75;text-transform:uppercase;margin:0;text-shadow:0 1px 12px rgba(0,0,0,.6)}
+.henley{font-family:var(--f-classic);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:rgba(243,239,231,.7);margin:0}
+.sky h1{font-family:var(--f-classic);font-weight:600;font-size:clamp(44px,8vw,86px);letter-spacing:.16em;padding-left:.16em;line-height:1;margin:18px 0 0;text-shadow:0 2px 24px rgba(0,0,0,.55)}
+.sig{font-family:var(--f-classic);font-size:12px;letter-spacing:.3em;text-transform:uppercase;margin:0}
+.cover .media{justify-content:center;gap:22px}
+.cover .lede{font-family:var(--f-display);font-style:italic;font-size:clamp(22px,2.6vw,28px);line-height:1.3;margin:0;max-width:30ch}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--gold)}
+.stats div{padding:12px 10px 12px 0;border-bottom:1px solid var(--rule);display:grid;gap:2px}
+.stats b{font-family:var(--f-head);font-weight:400;font-size:22px;font-variant-numeric:tabular-nums}
+.stats .nm{grid-column:1/-1}.stats .nm b{color:var(--gold);font-size:26px}
+.stats span{font-size:13px;color:var(--muted);line-height:1.35}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.cta .go{background:var(--gold);color:#120d06;border-color:var(--gold)}
+.cta .go:hover{color:#120d06;filter:brightness(1.08)}
+.how{font-size:13px;color:var(--muted);margin:0}
+
+/* sadržaj */
+dialog{background:var(--paper);color:var(--ink);border:1px solid var(--rule);max-width:min(720px,94vw);width:100%;max-height:86vh;padding:0;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+.dh{position:sticky;top:0;background:var(--paper);display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid var(--rule)}
+.dh h2{font-family:var(--f-classic);font-size:14px;letter-spacing:.24em;text-transform:uppercase;margin:0;font-weight:600}
+.toc{padding:6px 22px 24px}
+.toc h3{font-family:var(--f-head);font-weight:400;text-transform:uppercase;font-size:20px;margin:22px 0 4px}
+.toc h3 small{font-family:var(--f-data);font-size:11px;color:var(--gold);letter-spacing:.1em;margin-left:8px}
+.toc button{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);padding:8px 0;cursor:pointer}
+.toc button:hover{color:var(--gold)}
+.toc .td{font-family:var(--f-data);font-size:12px;color:var(--muted);padding-top:3px}
+.toc .tt{font-family:var(--f-display);font-style:italic;font-size:18px;line-height:1.25}
+.toc .tn{font-family:var(--f-data);font-size:11px;color:var(--muted);padding-top:4px}
+
+/* listanje */
+.turn-next{animation:tn .42s ease}
+.turn-prev{animation:tp .42s ease}
+@keyframes tn{0%{transform:rotateY(0);opacity:1}45%{transform:rotateY(-8deg) translateX(-2%);opacity:.15}55%{transform:rotateY(8deg) translateX(2%);opacity:.15}100%{transform:rotateY(0);opacity:1}}
+@keyframes tp{0%{transform:rotateY(0);opacity:1}45%{transform:rotateY(8deg) translateX(2%);opacity:.15}55%{transform:rotateY(-8deg) translateX(-2%);opacity:.15}100%{transform:rotateY(0);opacity:1}}
+@media (prefers-reduced-motion:reduce){.turn-next,.turn-prev{animation:none}}
+
+@media (max-width:860px){
+  .spread{grid-template-columns:1fr;grid-template-areas:"head" "media" "list";min-height:0}
+  .spread::after{display:none}
+  .head,.list{padding:22px 20px 0}
+  .list{padding-bottom:22px}
+  .media{padding:20px;border-block:1px solid var(--rule)}
+  .spread.cover{grid-template-areas:"head" "media"}
+  .cover .head{padding:0}
+  .top{gap:8px}.brand{flex-basis:100%}
+  #jump{flex:1 1 160px;min-width:0}
+  .nav .lbl{display:none}
+  .sky{min-height:420px}
+  .ent.sel{margin-inline:-10px;padding-inline:10px}
+}
+@media (max-width:420px){.ent{grid-template-columns:1fr;gap:4px}.ent .tm{padding:0}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#">SY <b>INVICTUS</b> · Brodski dnevnik</a>
+  <button class="tb" id="tocBtn" type="button">☰ Sadržaj</button>
+  <label class="sr" for="jump" style="position:absolute;left:-9999px">Skoči na dan</label>
+  <select class="tb" id="jump" aria-label="Skoči na dan"></select>
+  <a class="tb" href="dnevnik.html">Karta i cijeli dnevnik</a>
+</header>
+
+<main class="book" id="book" aria-live="polite"></main>
+
+<nav class="nav" aria-label="Listanje">
+  <button class="prev" id="prev" type="button" aria-label="Prethodni dan">‹<span class="lbl"> Prethodni dan</span></button>
+  <div class="pg" id="pg"></div>
+  <button class="next" id="next" type="button" aria-label="Sljedeći dan"><span class="lbl">Sljedeći dan </span>›</button>
+</nav>
+
+<dialog id="toc" aria-label="Sadržaj">
+  <div class="dh"><h2>Sadržaj</h2><button class="tb" type="button" id="tocClose">Zatvori ✕</button></div>
+  <div class="toc" id="tocList"></div>
+</dialog>
+
+<template id="statsTpl"><!--@STATS@--></template>
+
+<script>
+/*@DATA@*/
+const MON=["","siječnja","veljače","ožujka","travnja","svibnja","lipnja","srpnja","kolovoza","rujna","listopada","studenoga","prosinca"];
+const WD=["nedjelja","ponedjeljak","utorak","srijeda","četvrtak","petak","subota"];
+const LEGN=Object.fromEntries(LEGS.map(l=>[l.id,l.n]));
+const pad=n=>String(n).padStart(2,"0");
+function dm(v,lat){const a=Math.abs(v),d=Math.floor(a),m=Math.round((a-d)*60);return (lat?pad(d):String(d).padStart(3,"0"))+"°"+pad(m)+"′"+(lat?(v>=0?"N":"S"):(v>=0?"E":"W"));}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const isVid=id=>/^\d+$/.test(id);
+const fbUrl=id=>isVid(id)?`https://www.facebook.com/reel/${id}/`:`https://www.facebook.com/darko.slovsa/posts/${id}`;
+const embedUrl=(id,w)=>`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent("https://www.facebook.com/darko.slovsa/videos/"+id+"/")}&show_text=false&width=${w}&t=0`;
+
+// dani
+let year=2026,lastM=0;const DAYS=[];const byKey={};
+E.forEach((e,i)=>{const [d,m]=e[1].split(".").map(Number);if(m<lastM)year++;lastM=m;
+  const key=`${year}-${pad(m)}-${pad(d)}`;if(!byKey[key]){byKey[key]={key,y:year,m,d,ents:[]};DAYS.push(byKey[key]);}
+  byKey[key].ents.push({leg:e[0],date:e[1],tm:e[2],k:e[3],title:e[4],text:e[5],fb:e[6],hl:e[7],place:e[8],i});});
+const START=Date.UTC(2026,7,1);
+DAYS.forEach(D=>{D.n=Math.round((Date.UTC(D.y,D.m-1,D.d)-START)/864e5)+1;D.wd=WD[new Date(Date.UTC(D.y,D.m-1,D.d)).getUTCDay()];
+  D.legs=[...new Set(D.ents.map(e=>e.leg))];});
+// zadnji dan svake etape dobiva citat
+const legLast={};DAYS.forEach((D,ix)=>D.legs.forEach(l=>legLast[l]=ix));
+const PAGES=DAYS.length+1; // 0 = naslovnica
+
+const book=document.getElementById("book"),pg=document.getElementById("pg"),prev=document.getElementById("prev"),next=document.getElementById("next");
+let cur=0,sel=0;
+
+function cover(){
+  const st=document.getElementById("statsTpl").innerHTML;
+  return `<article class="spread cover">
+  <section class="head"><div class="sky">
+    <div class="orn"><span></span></div>
+    <p class="verse">I am the master of my fate,<br>I am the captain of my soul.</p>
+    <p class="henley">Invictus · William Ernest Henley</p>
+    <div class="orn"><span></span></div>
+    <h1>INVICTUS</h1><p class="sig">Brodski dnevnik · Around the World</p>
+  </div></section>
+  <section class="media">
+    <p class="lede">Od Marine Punat preko Atlantika, javljanje po javljanje. Svaki list je jedan dan na moru.</p>
+    <div class="stats">${st}</div>
+    <div class="cta"><button class="tb go" type="button" data-go="1">Otvori dnevnik ›</button><button class="tb" type="button" data-go="${PAGES-1}">Najnoviji dan</button><button class="tb" type="button" data-toc>Sadržaj</button></div>
+    <p class="how">Listaj strelicama, tipkama ← → ili povlačenjem prsta. Uz svako javljanje s videom, video se pušta na desnoj strani lista.</p>
+  </section></article>`;
+}
+
+function dayPage(ix){
+  const D=DAYS[ix];const ents=D.ents;
+  const places=[...new Set(ents.map(e=>e.place))];
+  const c=P[ents[ents.length-1].k]||[0,0];
+  const legTxt=D.legs.map(l=>LEGN[l]).join(" → ");
+  const vids=ents.filter(e=>isVid(e.fb));
+  if(sel>=ents.length)sel=0;
+  // zadani odabir: prvo javljanje s videom
+  const chosen=ents[sel]&&isVid(ents[sel].fb)?ents[sel]:(vids[0]||ents[sel]);
+  const list=ents.map((e,j)=>`<div class="ent${e.hl?" hl":""}${e===chosen?" sel":""}">
+      <div class="tm">${esc(e.tm)}</div>
+      <div><h3>${esc(e.title)}</h3><p class="pl">${esc(e.place)}</p><p class="t">${esc(e.text)}</p>
+      <div class="act">${isVid(e.fb)?`<button class="chip${e===chosen?" on":""}" type="button" data-sel="${j}">▶ Video</button>`:""}${e.fb?`<a class="chip" href="${fbUrl(e.fb)}" target="_blank" rel="noopener">Objava na Facebooku ↗</a>`:""}</div></div></div>`).join("");
+  const quotes=D.legs.filter(l=>legLast[l]===ix&&Q[l]&&l!==DAYS[DAYS.length-1].legs.slice(-1)[0]).map(l=>`<blockquote><q>${esc(Q[l][0])}</q><cite>Jutarnja misao · ${esc(Q[l][1])}</cite></blockquote>`).join("");
+  let media;
+  if(chosen&&isVid(chosen.fb)){
+    media=`<div class="player" id="player"><div class="ph">Učitavam video…</div></div>
+      <div class="cap"><b>${esc(chosen.title)}</b><span>${esc(chosen.tm)}</span></div>
+      ${vids.length>1?`<div class="tabs" role="tablist">${ents.map((e,j)=>isVid(e.fb)?`<button class="tab${e===chosen?" on":""}" type="button" data-sel="${j}">${esc(e.tm)}</button>`:"").join("")}</div>`:""}
+      <p class="mnote">Ako se video ne učita, <a href="${fbUrl(chosen.fb)}" target="_blank" rel="noopener">otvori ga na Facebooku ↗</a></p>`;
+  }else{
+    media=`<div class="player"><div class="ph">Za ovaj dan nema videa u playeru.<br>${chosen&&chosen.fb?`<a href="${fbUrl(chosen.fb)}" target="_blank" rel="noopener" style="color:var(--gold)">Otvori objavu na Facebooku ↗</a>`:""}</div></div>`;
+  }
+  return `<article class="spread">
+    <section class="head"><div class="run"><span class="leg">${esc(legTxt)}</span><span>Dan ${D.n} na moru</span></div>
+      <div class="date"><span class="dn">${D.d}.</span><span class="mo">${MON[D.m]}<br>${D.y}.</span><span class="wd">${D.wd} · ${ents.length} ${ents.length===1?"javljanje":(ents.length<5?"javljanja":"javljanja")}</span></div>
+      <p class="places">${esc(places.join(" · "))}</p><div class="coord">${dm(c[0],1)} &nbsp; ${dm(c[1],0)}</div></section>
+    <section class="list">${list}${quotes}</section>
+    <section class="media">${media}</section>
+  </article>`;
+}
+
+function mountPlayer(){
+  const pl=document.getElementById("player");if(!pl)return;
+  const D=DAYS[cur-1];const vids=D.ents;const e=vids[sel]&&isVid(vids[sel].fb)?vids[sel]:vids.find(x=>isVid(x.fb));
+  const w=Math.max(220,Math.min(380,Math.round(pl.clientWidth||320)));
+  pl.innerHTML=`<iframe title="${esc(e.title)}" src="${embedUrl(e.fb,w)}" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>`;
+}
+
+function render(dir){
+  const html=cur===0?cover():dayPage(cur-1);
+  const swap=()=>{book.innerHTML=html;mountPlayer();
+    pg.innerHTML=cur===0?"<b>Naslovnica</b>":`<b>${DAYS[cur-1].d}. ${MON[DAYS[cur-1].m]}</b> · list ${cur} / ${PAGES-1}`;
+    prev.disabled=cur===0;next.disabled=cur===PAGES-1;
+    document.getElementById("jump").value=String(cur);
+    const h=cur===0?"":"#dan-"+DAYS[cur-1].key;
+    if(location.hash!==h)history.replaceState(null,"",h||location.pathname);
+  };
+  const sp=book.firstElementChild;
+  if(dir&&sp&&!matchMedia("(prefers-reduced-motion: reduce)").matches){
+    sp.classList.add(dir>0?"turn-next":"turn-prev");setTimeout(()=>{swap();},200);
+  }else swap();
+}
+function go(n,keepSel){n=Math.max(0,Math.min(PAGES-1,n));if(n===cur&&keepSel)return;const dir=Math.sign(n-cur);cur=n;if(!keepSel)sel=0;render(dir);
+  if(dir)window.scrollTo({top:0,behavior:"smooth"});}
+
+prev.onclick=()=>go(cur-1);next.onclick=()=>go(cur+1);
+document.addEventListener("keydown",e=>{if(document.getElementById("toc").open)return;if(e.target.closest("select,input"))return;
+  if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1);});
+book.addEventListener("click",e=>{const s=e.target.closest("[data-sel]");if(s){sel=+s.dataset.sel;render(0);if(matchMedia("(max-width:860px)").matches){const m=book.querySelector(".media");if(m)m.scrollIntoView({behavior:"smooth",block:"start"});}return;}
+  const g=e.target.closest("[data-go]");if(g){go(+g.dataset.go);return;}if(e.target.closest("[data-toc]"))openToc();});
+// povlačenje prstom
+let sx=null,sy=null;book.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+book.addEventListener("touchend",e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;sx=null;
+  if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.6)go(cur+(dx<0?1:-1));},{passive:true});
+
+// skok na dan
+const jump=document.getElementById("jump");
+jump.innerHTML=`<option value="0">Naslovnica</option>`+DAYS.map((D,i)=>`<option value="${i+1}">${D.d}. ${D.m}. ${D.y}. · ${esc(D.ents[0].place)}</option>`).join("");
+jump.onchange=()=>go(+jump.value);
+
+// sadržaj
+const toc=document.getElementById("toc");
+function openToc(){toc.showModal();const el=toc.querySelector(`[data-p="${cur}"]`);if(el)el.scrollIntoView({block:"center"});}
+document.getElementById("tocBtn").onclick=openToc;document.getElementById("tocClose").onclick=()=>toc.close();
+toc.addEventListener("click",e=>{if(e.target===toc)toc.close();const b=e.target.closest("[data-p]");if(b){toc.close();go(+b.dataset.p);}});
+document.getElementById("tocList").innerHTML=LEGS.map(L=>{const ds=DAYS.map((D,i)=>[D,i]).filter(([D])=>D.legs[0]===L.id);if(!ds.length)return"";
+  return `<h3>${esc(L.n)}<small>${esc(L.r)}</small></h3>`+ds.map(([D,i])=>{const t=D.ents.find(e=>e.title!=="Jutarnja misao")||D.ents[0];
+    return `<button type="button" data-p="${i+1}"><span class="td">${D.d}. ${D.m}.</span><span class="tt">${esc(t.title)}</span><span class="tn">${D.ents.length}×</span></button>`;}).join("");}).join("");
+document.querySelector(".brand").onclick=e=>{e.preventDefault();go(0);};
+
+// početna stranica iz adrese
+function fromHash(){const m=location.hash.match(/^#dan-(\d{4}-\d{2}-\d{2})$/);const i=m?DAYS.findIndex(D=>D.key===m[1]):-1;cur=i>=0?i+1:0;sel=0;render(0);}
+window.addEventListener("hashchange",fromHash);
+let rz;window.addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{if(cur>0)mountPlayer();},400);});
+fromHash();
+</script>
+</body>
+</html>
