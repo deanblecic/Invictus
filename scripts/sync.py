@@ -51,6 +51,9 @@ data = "\n".join([
 import json
 tf = root / "data" / "tekstovi.json"
 texts = json.loads(tf.read_text(encoding="utf-8")) if tf.exists() else {}
+nf = root / "data" / "noembed.json"
+noemb = json.loads(nf.read_text(encoding="utf-8")) if nf.exists() else []
+data += "\nconst NOEMBED=new Set(" + json.dumps(noemb) + ");"
 data += "\nconst T=" + json.dumps(texts, ensure_ascii=False) + ";"
 m = re.search(r'<div class="stats">\s*(.*?)\s*</div>\s*</header>', src, re.S)
 stats = m.group(1) if m else ""

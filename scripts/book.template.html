@@ -108,6 +108,12 @@ table.log{width:100%;border-collapse:collapse;margin:4px 0 22px;font-size:14px}
 .photo::after{top:-12px;right:-26px;transform:rotate(38deg)}
 .player{height:min(calc(100vh - 290px),620px);aspect-ratio:9/16;background:#1d1610;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .player iframe{width:100%;height:100%;border:0;display:block}
+.fbonly{flex-direction:column;gap:14px;text-decoration:none;color:#f1e4c4;text-align:center;padding:24px;
+  background:radial-gradient(ellipse at 50% 35%,#3a2a1c,#17110b 75%)}
+.fbonly .pb{width:84px;height:84px;border-radius:50%;border:2px solid var(--gold2);display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--gold2);padding-left:6px;transition:transform .15s}
+.fbonly:hover .pb{transform:scale(1.08);background:rgba(201,162,75,.15)}
+.fbonly .fl{font:600 30px/1.1 Caveat,cursive;color:var(--gold2)}
+.fbonly .why{font:italic 15px/1.4 "EB Garamond",serif;color:#bfae88;max-width:240px}
 .ph{color:#cdbb92;text-align:center;padding:20px;font:400 22px/1.3 Caveat,cursive}
 .ph a{color:var(--gold2)}
 .cap{margin:8px 2px 0;text-align:center;font:400 23px/1.15 Caveat,cursive;color:var(--blue);max-width:340px}
@@ -227,6 +233,7 @@ dialog::backdrop{background:rgba(15,9,5,.72)}
   .day .folio{display:none}
   .media{position:static}
   .player{height:auto;width:min(100%,340px)}
+  .fbonly{aspect-ratio:9/12}
   .photo{transform:rotate(-1deg)}
   .title-day .dn{font-size:46px}
   .log th:nth-child(4),.log td:nth-child(4){display:none}
@@ -360,10 +367,15 @@ function dayPage(ix){
   const quotes=D.legs.filter(l=>legLast[l]===ix&&Q[l]&&l!==DAYS[DAYS.length-1].legs.slice(-1)[0]).map(l=>`<blockquote><q>${esc(Q[l][0])}</q><cite>Jutarnja misao · ${esc(Q[l][1])}</cite></blockquote>`).join("");
   let media;
   if(chosen&&isVid(chosen.fb)){
-    media=`<div class="photo"><div class="player" id="player"><div class="ph">Učitavam video…</div></div>
-      <p class="cap">${esc(chosen.title)}<span>${esc(chosen.tm)}</span></p></div>
-      ${vids.length>1?`<div class="tabs" role="tablist" aria-label="Videi ovog dana">${ents.map((e,j)=>isVid(e.fb)?`<button class="tab${e===chosen?" on":""}" type="button" data-sel="${j}">${esc(e.tm)}</button>`:"").join("")}</div>`:""}
-      <p class="mnote">Ako se video ne učita, <a href="${fbUrl(chosen.fb)}" target="_blank" rel="noopener">otvori ga na Facebooku ↗</a></p>`;
+    if(NOEMBED.has(chosen.fb)){
+      media=`<div class="photo"><a class="player fbonly" href="${fbUrl(chosen.fb)}" target="_blank" rel="noopener"><span class="pb">▶</span><span class="fl">Pogledaj video<br>na Facebooku</span><span class="why">Facebook ovaj video ne dopušta prikazati izvan Facebooka, vjerojatno zbog glazbe u njemu.</span></a>
+      <p class="cap">${esc(chosen.title)}<span>${esc(chosen.tm)}</span></p></div>`;
+    }else{
+      media=`<div class="photo"><div class="player" id="player"><div class="ph">Učitavam video…</div></div>
+      <p class="cap">${esc(chosen.title)}<span>${esc(chosen.tm)}</span></p></div>`;
+    }
+    media+=`${vids.length>1?`<div class="tabs" role="tablist" aria-label="Videi ovog dana">${ents.map((e,j)=>isVid(e.fb)?`<button class="tab${e===chosen?" on":""}" type="button" data-sel="${j}">${esc(e.tm)}</button>`:"").join("")}</div>`:""}
+      ${NOEMBED.has(chosen.fb)?"":`<p class="mnote">Ako se video ne učita, <a href="${fbUrl(chosen.fb)}" target="_blank" rel="noopener">otvori ga na Facebooku ↗</a></p>`}`;
   }else{
     media=`<div class="nophoto"><p>Za ovaj dan u dnevnik nije zalijepljen video.</p>${chosen&&chosen.fb?`<a class="chip" href="${fbUrl(chosen.fb)}" target="_blank" rel="noopener">objava s fotografijama na Facebooku ↗</a>`:""}</div>`;
   }
@@ -389,6 +401,7 @@ function dayPage(ix){
 function mountPlayer(){
   const pl=document.getElementById("player");if(!pl)return;
   const D=DAYS[cur-1];const vids=D.ents;const e=vids[sel]&&isVid(vids[sel].fb)?vids[sel]:vids.find(x=>isVid(x.fb));
+  if(!e||NOEMBED.has(e.fb))return;
   const w=Math.max(220,Math.min(380,Math.round(pl.clientWidth||320)));
   pl.innerHTML=`<iframe title="${esc(e.title)}" src="${embedUrl(e.fb,w)}" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>`;
 }
