@@ -22,6 +22,17 @@ else:
 # poveznica natrag na knjigu
 full = full.replace('<span class="sig">SY INVICTUS · Around the World</span>\n  <span>Sastavljeno',
                     '<span class="sig">SY INVICTUS · Around the World</span>\n  <a href="./" style="color:var(--track)">Otvori dnevnik kao knjigu ›</a>\n  <span>Sastavljeno', 1)
+# istaknuta poveznica na knjigu: traka na vrhu i gumb ispod uvoda
+BOOKCSS = ('<style>.tobook{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 0 12px;'
+  'font:500 13px/1.3 "IBM Plex Mono",monospace;letter-spacing:.06em;color:var(--track)}'
+  '.tobook a,.bookbtn{display:inline-block;border:1px solid var(--track);color:var(--track);text-decoration:none;padding:9px 14px;border-radius:3px;'
+  'font:600 14px/1 "Source Sans 3",system-ui,sans-serif;letter-spacing:.04em}'
+  '.tobook a:hover,.bookbtn:hover{background:var(--track);color:#120d06}'
+  '.bookbtn{justify-self:start;width:fit-content;max-width:100%;margin:4px 0 22px;background:var(--track);color:#120d06;font-size:16px;padding:12px 18px}</style>\n')
+full = full.replace('</head>', BOOKCSS + '</head>', 1)
+full = full.replace('<div class="wrap">\n<header class="hero">',
+  '<div class="wrap">\n<div class="tobook"><span>SY INVICTUS · karta i cijeli dnevnik</span><a href="./">📖 Otvori dnevnik kao knjigu ›</a></div>\n<header class="hero">', 1)
+full = re.sub(r'(<p class="lede">.*?</p>)', r'\1\n  <a class="bookbtn" href="./">📖 Čitaj dnevnik kao knjigu, dan po dan ›</a>', full, count=1, flags=re.S)
 (root / "dnevnik.html").write_text(full, encoding="utf-8")
 
 # --- index.html (knjiga) ---
