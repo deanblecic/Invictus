@@ -6,7 +6,7 @@
 <title>Brodski dnevnik INVICTUS</title>
 <meta name="description" content="Brodski dnevnik SY INVICTUS: put oko svijeta katamaranom, dan po dan, kao knjiga koja se lista.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Literata:opsz,wght@7..72,400;7..72,600&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Knjiga: tamni brodski dnevnik u Darkovom stilu. Svaki dan je jedan dvostruki list:
    lijevo datum i javljanja, desno video odabranog javljanja. Na mobitelu jedno ispod drugog. */
@@ -17,6 +17,7 @@
   --f-classic:"Cinzel","Trajan Pro",Georgia,serif;
   --f-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
   --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-read:"Literata",Georgia,"Times New Roman",serif;
   --f-data:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
   color-scheme:dark;
 }
@@ -35,12 +36,13 @@ button{font:inherit;color:inherit}
 select.tb{appearance:none;background:var(--paper)}
 
 .book{max-width:1180px;margin:0 auto;perspective:2200px}
-.spread{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"head media" "list media";background:var(--paper);border:1px solid var(--rule);box-shadow:0 30px 80px rgba(0,0,0,.55);min-height:min(78vh,760px);position:relative;transform-origin:50% 50%}
+.spread{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"head media" "list media";grid-template-rows:auto 1fr;background:linear-gradient(90deg,var(--paper) 50%,var(--paper2) 50%);border:1px solid var(--rule);box-shadow:0 30px 80px rgba(0,0,0,.55);min-height:min(78vh,760px);position:relative;transform-origin:50% 50%}
 .spread::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:46px;margin-left:-23px;pointer-events:none;
   background:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.38) 48%,rgba(255,255,255,.04) 52%,rgba(0,0,0,0) 100%)}
 .head,.list{padding:30px 44px 0 40px;min-width:0}
 .list{padding-bottom:30px}
-.media{grid-area:media;background:var(--paper2);padding:30px 40px 30px 44px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.media{grid-area:media;padding:30px 40px 30px 44px;display:flex;flex-direction:column;gap:14px;min-width:0;position:sticky;top:8px;align-self:start;max-height:calc(100vh - 16px)}
+.media .player{height:min(calc(100vh - 200px),676px);width:auto;max-width:100%;aspect-ratio:9/16}
 .head{grid-area:head}.list{grid-area:list}
 .run{display:flex;justify-content:space-between;gap:12px;font-family:var(--f-classic);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule);padding-bottom:10px}
 .run .leg{color:var(--gold)}
@@ -56,11 +58,15 @@ select.tb{appearance:none;background:var(--paper)}
 .ent h3{font-family:var(--f-head);font-weight:400;font-size:19px;line-height:1.15;text-transform:uppercase;margin:0 0 2px;text-wrap:balance}
 .ent.hl h3{color:var(--gold)}
 .ent .pl{font-family:var(--f-display);font-style:italic;font-size:17px;color:#cfc8ba;margin:0 0 6px}
-.ent p.t{margin:0;color:#e6e1d7;font-size:16.5px}
+.ent .txt{font-family:var(--f-read);font-size:16.5px;line-height:1.72;color:#e9e4da;max-width:62ch}
+.ent .txt p{margin:0 0 .45em}
+.ent .txt p:last-child{margin-bottom:0}
+.ent .txt h4{font-family:var(--f-body);font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:1.3em 0 .4em;line-height:1.4}
+.ent .txt h4:first-child{margin-top:.2em}
 .ent .act{margin-top:8px;display:flex;gap:10px;flex-wrap:wrap}
 .chip{font-family:var(--f-classic);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);background:none;border:0;border-bottom:1px solid var(--rule);padding:2px 0;cursor:pointer;text-decoration:none}
 .chip:hover,.chip.on{color:var(--gold);border-color:var(--gold)}
-.ent.sel{background:linear-gradient(90deg,var(--gold-soft),transparent 70%);margin-inline:-14px;padding-inline:14px}
+.ent.sel{box-shadow:inset 3px 0 0 var(--gold);margin-inline:-14px;padding-inline:14px}
 blockquote{margin:26px 0 0;padding:22px 18px;border:1px solid var(--rule);background:linear-gradient(180deg,#0f1218,#171b22);text-align:center}
 blockquote q{quotes:none;font-family:var(--f-display);font-style:italic;font-weight:600;font-size:24px;line-height:1.2;display:block}
 blockquote cite{display:block;margin-top:8px;font-family:var(--f-data);font-style:normal;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
@@ -137,7 +143,8 @@ dialog::backdrop{background:rgba(0,0,0,.7)}
   .spread::after{display:none}
   .head,.list{padding:22px 20px 0}
   .list{padding-bottom:22px}
-  .media{padding:20px;border-block:1px solid var(--rule)}
+  .media{padding:20px;border-block:1px solid var(--rule);position:static;max-height:none;background:var(--paper2)}
+  .spread{background:var(--paper)}
   .spread.cover{grid-template-areas:"head" "media"}
   .cover .head{padding:0}
   .top{gap:8px}.brand{flex-basis:100%}
@@ -145,6 +152,7 @@ dialog::backdrop{background:rgba(0,0,0,.7)}
   .nav .lbl{display:none}
   .sky{min-height:420px}
   .ent.sel{margin-inline:-10px;padding-inline:10px}
+  .media .player{height:auto;width:100%}
 }
 @media (max-width:420px){.ent{grid-template-columns:1fr;gap:4px}.ent .tm{padding:0}}
 </style>
@@ -182,6 +190,10 @@ const pad=n=>String(n).padStart(2,"0");
 function dm(v,lat){const a=Math.abs(v),d=Math.floor(a),m=Math.round((a-d)*60);return (lat?pad(d):String(d).padStart(3,"0"))+"°"+pad(m)+"′"+(lat?(v>=0?"N":"S"):(v>=0?"E":"W"));}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const isVid=id=>/^\d+$/.test(id);
+// Darkov izvorni tekst: retci u odlomke, kratki retci velikim slovima kao međunaslovi
+function fmt(e){const t=T[e.key];if(!t)return `<p>${esc(e.text)}</p>`;
+  return t.split(/\n+/).map(l=>l.trim()).filter(Boolean).map(l=>{const letters=l.replace(/[^A-Za-zČĆŽŠĐčćžšđ]/g,"");const up=letters.replace(/[^A-ZČĆŽŠĐ]/g,"").length;
+    return (letters.length>=6&&up/letters.length>.8&&l.length<110)?`<h4>${esc(l)}</h4>`:`<p>${esc(l)}</p>`;}).join("");}
 const fbUrl=id=>isVid(id)?`https://www.facebook.com/reel/${id}/`:`https://www.facebook.com/darko.slovsa/posts/${id}`;
 const embedUrl=(id,w)=>`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent("https://www.facebook.com/darko.slovsa/videos/"+id+"/")}&show_text=false&width=${w}&t=0`;
 
@@ -189,7 +201,7 @@ const embedUrl=(id,w)=>`https://www.facebook.com/plugins/video.php?href=${encode
 let year=2026,lastM=0;const DAYS=[];const byKey={};
 E.forEach((e,i)=>{const [d,m]=e[1].split(".").map(Number);if(m<lastM)year++;lastM=m;
   const key=`${year}-${pad(m)}-${pad(d)}`;if(!byKey[key]){byKey[key]={key,y:year,m,d,ents:[]};DAYS.push(byKey[key]);}
-  byKey[key].ents.push({leg:e[0],date:e[1],tm:e[2],k:e[3],title:e[4],text:e[5],fb:e[6],hl:e[7],place:e[8],i});});
+  byKey[key].ents.push({leg:e[0],date:e[1],tm:e[2],k:e[3],title:e[4],text:e[5],fb:e[6],hl:e[7],place:e[8],i,key:d+'.'+m+' '+e[2]});});
 const START=Date.UTC(2026,7,1);
 DAYS.forEach(D=>{D.n=Math.round((Date.UTC(D.y,D.m-1,D.d)-START)/864e5)+1;D.wd=WD[new Date(Date.UTC(D.y,D.m-1,D.d)).getUTCDay()];
   D.legs=[...new Set(D.ents.map(e=>e.leg))];});
@@ -211,10 +223,10 @@ function cover(){
     <h1>INVICTUS</h1><p class="sig">Brodski dnevnik · Around the World</p>
   </div></section>
   <section class="media">
-    <p class="lede">Od Marine Punat preko Atlantika, javljanje po javljanje. Svaki list je jedan dan na moru.</p>
+    <p class="lede">Od Marine Punat preko Atlantika, Darkovim riječima. Svaki list je jedan dan na moru.</p>
     <div class="stats">${st}</div>
     <div class="cta"><button class="tb go" type="button" data-go="1">Otvori dnevnik ›</button><button class="tb" type="button" data-go="${PAGES-1}">Najnoviji dan</button><button class="tb" type="button" data-toc>Sadržaj</button></div>
-    <p class="how">Listaj strelicama, tipkama ← → ili povlačenjem prsta. Uz svako javljanje s videom, video se pušta na desnoj strani lista.</p>
+    <p class="how">Na svakom listu su Darkova javljanja tog dana u cijelosti, a desno video. Listaj strelicama, tipkama ← → ili povlačenjem prsta.</p>
   </section></article>`;
 }
 
@@ -229,7 +241,7 @@ function dayPage(ix){
   const chosen=ents[sel]&&isVid(ents[sel].fb)?ents[sel]:(vids[0]||ents[sel]);
   const list=ents.map((e,j)=>`<div class="ent${e.hl?" hl":""}${e===chosen?" sel":""}">
       <div class="tm">${esc(e.tm)}</div>
-      <div><h3>${esc(e.title)}</h3><p class="pl">${esc(e.place)}</p><p class="t">${esc(e.text)}</p>
+      <div><h3>${esc(e.title)}</h3><p class="pl">${esc(e.place)}</p><div class="txt">${fmt(e)}</div>
       <div class="act">${isVid(e.fb)?`<button class="chip${e===chosen?" on":""}" type="button" data-sel="${j}">▶ Video</button>`:""}${e.fb?`<a class="chip" href="${fbUrl(e.fb)}" target="_blank" rel="noopener">Objava na Facebooku ↗</a>`:""}</div></div></div>`).join("");
   const quotes=D.legs.filter(l=>legLast[l]===ix&&Q[l]&&l!==DAYS[DAYS.length-1].legs.slice(-1)[0]).map(l=>`<blockquote><q>${esc(Q[l][0])}</q><cite>Jutarnja misao · ${esc(Q[l][1])}</cite></blockquote>`).join("");
   let media;
