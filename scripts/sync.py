@@ -51,6 +51,24 @@ data = "\n".join([
 import json
 tf = root / "data" / "tekstovi.json"
 texts = json.loads(tf.read_text(encoding="utf-8")) if tf.exists() else {}
+# Puni tekstovi novih objava koje agent sprema u dnevnik na claude.ai (const TX={...};)
+# dodaju se u data/tekstovi.json; postojeći tekstovi se ne mijenjaju.
+mtx = re.search(r"const TX=(\{.*?\});\s*$", src, re.S | re.M)
+if mtx:
+    try:
+        tx = json.loads(mtx.group(1))
+    except Exception as ex:
+        tx = {}
+        print("UPOZORENJE: const TX nije ispravan JSON:", ex)
+    added = 0
+    for k, v in tx.items():
+        v = re.sub(r"\s*Sažmi\s*$", "", v)
+        v = re.sub(r"(\s*#\w+)+\s*$", "", v).strip()
+        if k not in texts and v:
+            texts[k] = v; added += 1
+    if added:
+        tf.write_text(json.dumps(texts, ensure_ascii=False, indent=0), encoding="utf-8")
+        print("Dodano punih tekstova iz TX:", added)
 nf = root / "data" / "noembed.json"
 noemb = json.loads(nf.read_text(encoding="utf-8")) if nf.exists() else []
 data += "\nconst NOEMBED=new Set(" + json.dumps(noemb) + ");"
