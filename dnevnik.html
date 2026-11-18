@@ -139,7 +139,7 @@ footer .bye{font-family:var(--f-display);font-style:italic;font-size:24px;color:
     <div class="regions" id="regions"></div>
   </div>
   <div class="mapbox" id="mapbox">
-    <svg id="map" role="img" aria-label="Pomorska karta rute katamarana INVICTUS od Punta do Tenerifea"></svg>
+    <svg id="map" role="img" aria-label="Pomorska karta rute katamarana INVICTUS oko svijeta"></svg>
     <div class="zoom"><button id="zin" aria-label="Približi">+</button><button id="zout" aria-label="Udalji">−</button></div>
     <div class="info" id="info" hidden><b id="iname"></b><span id="idate"></span><span id="ipos"></span><p id="idesc"></p><button id="igo">Pročitaj zapis ↓</button></div>
   </div>
@@ -583,9 +583,32 @@ const DESC={
 const svg=document.getElementById("map"),NS="http://www.w3.org/2000/svg",box=document.getElementById("mapbox");
 function mk(n,a,p){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;}
 const g0=mk("g",{});
-for(let lon=-15;lon<=20;lon+=5)mk("line",{class:"grat",x1:X(lon),x2:X(lon),y1:0,y2:MAPH},g0);
-for(let lat=30;lat<=45;lat+=5)mk("line",{class:"grat",x1:0,x2:MAPW,y1:Y(lat),y2:Y(lat)},g0);
-mk("path",{class:"land",d:LAND},g0);
+// karta cijelog svijeta: mreža svakih 10°, kopno svijeta (Natural Earth 1:50 000 000) i detaljnije kopno od Jadrana do Kanara (LAND)
+const WX0=X(-180),WX1=X(180),WY0=Y(84),WY1=Y(-80);
+for(let lon=-180;lon<=180;lon+=10)mk("line",{class:"grat",x1:X(lon),x2:X(lon),y1:WY0,y2:WY1},g0);
+for(let lat=-80;lat<=80;lat+=10)mk("line",{class:"grat",x1:WX0,x2:WX1,y1:Y(lat),y2:Y(lat)},g0);
+// LAND pokriva pravokutnik lon -19..24, lat 25..48,2; svjetsko kopno crta se samo izvan njega
+const RB={x0:X(-19),x1:X(24),y0:Y(48.2),y1:Y(25)};
+const defs=mk("defs",{});const cp=mk("clipPath",{id:"izvanLAND"},defs);
+mk("path",{"clip-rule":"evenodd",d:`M${WX0-50} ${WY0-50}H${WX1+50}V${WY1+50}H${WX0-50}Z M${RB.x0} ${RB.y0}H${RB.x1}V${RB.y1}H${RB.x0}Z`},cp);
+const gWorld=mk("g",{"clip-path":"url(#izvanLAND)"},g0);
+fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-50m.json").then(r=>r.json()).then(t=>{
+  const tr=t.transform,arcs=t.arcs.map(a=>{let x=0,y=0;return a.map(p=>tr?(x+=p[0],y+=p[1],[x*tr.scale[0]+tr.translate[0],y*tr.scale[1]+tr.translate[1]]):p);});
+  let d="";
+  const ring=r=>{let pts=[];r.forEach(i=>{const a=i<0?arcs[~i].slice().reverse():arcs[i];pts=pts.length?pts.concat(a.slice(1)):a.slice();});
+    if(pts.every(p=>p[1]<-55))return; // Antarktika se ne crta
+    // kopno preko 180. meridijana: poveži ga bez skoka i nacrtaj još pomaknuto za ±360°
+    let wrap=false;pts=pts.map(p=>p.slice());for(let j=1;j<pts.length;j++){while(pts[j][0]-pts[j-1][0]>180){pts[j][0]-=360;wrap=true;}while(pts[j][0]-pts[j-1][0]<-180){pts[j][0]+=360;wrap=true;}}
+    (wrap?[0,360,-360]:[0]).forEach(o=>{d+=pts.map((p,j)=>(j?"L":"M")+X(p[0]+o).toFixed(1)+" "+Y(p[1]).toFixed(1)).join("")+"Z";});};
+  const o=t.objects.land;(o.geometries||[o]).forEach(g=>{if(g.type==="Polygon")g.arcs.forEach(ring);else if(g.type==="MultiPolygon")g.arcs.forEach(p=>p.forEach(ring));});
+  mk("path",{class:"land",d},gWorld);
+}).catch(()=>{});
+// detaljno kopno: ispuna bez obruba, a obala bez umjetnih rubova pravokutnika
+mk("path",{class:"land",d:LAND,style:"stroke:none"},g0);
+{let c="";const onEdge=(a,b)=>(Math.abs(a[0]-b[0])<.01&&(Math.abs(a[0]-RB.x1)<1||Math.abs(a[0]-RB.x0)<1))||(Math.abs(a[1]-b[1])<.01&&(Math.abs(a[1]-RB.y0)<1||Math.abs(a[1]-RB.y1)<1));
+ (LAND.match(/M[^M]*/g)||[]).forEach(sub=>{const q=(sub.match(/-?[\d.]+ -?[\d.]+/g)||[]).map(t=>t.split(" ").map(Number));q.push(q[0]);let pen=false;
+  for(let i=1;i<q.length;i++){if(onEdge(q[i-1],q[i])){pen=false;continue;}if(!pen){c+="M"+q[i-1][0]+" "+q[i-1][1];pen=true;}c+="L"+q[i][0]+" "+q[i][1];}});
+ mk("path",{class:"land",d:c,style:"fill:none"},g0);}
 mk("path",{class:"border",d:BORD},g0);
 const seas=[["Jadransko more",43.0,15.6,1],["Jonsko more",37.6,18.6,1],["Tirensko more",39.9,12.4,1],["Ligursko more",43.6,8.6,1],["Balearsko more",40.4,2.5,1],["Alboransko more",35.95,-3.6,1],["Atlantski ocean",32.5,-15.5,1]];
 const sealbls=seas.map(([t,la,lo])=>{const e=mk("text",{class:"sealbl",x:X(lo),y:Y(la),"text-anchor":"middle"},g0);e.textContent=t;return e;});
@@ -621,8 +644,8 @@ function apply(){
 }
 function clamp(){
   const minW=MAPW/14,a=BH()/BW();
-  vb.w=Math.max(minW,Math.min(vb.w,MAPW*1.15));vb.h=vb.w*a;
-  vb.x=Math.max(-vb.w*0.3,Math.min(vb.x,MAPW-vb.w*0.7));vb.y=Math.max(-vb.h*0.3,Math.min(vb.y,MAPH-vb.h*0.7));
+  vb.w=Math.max(minW,Math.min(vb.w,WX1-WX0));vb.h=vb.w*a;
+  vb.x=Math.max(WX0-vb.w*0.3,Math.min(vb.x,WX1-vb.w*0.7));vb.y=Math.max(WY0-vb.h*0.3,Math.min(vb.y,WY1-vb.h*0.7));
 }
 function fit(lat0,lat1,lon0,lon1){
   const x0=X(lon0),x1=X(lon1),y0=Y(lat1),y1=Y(lat0),a=BH()/BW();
@@ -634,6 +657,7 @@ function zoomAt(f,cx,cy){ // f>1 približi; cx,cy u pikselima kutije
   vb.w/=f;clamp();vb.x=ux-cx/BW()*vb.w;vb.y=uy-cy/BH()*vb.h;clamp();apply();
 }
 const REG=[["Cijela ruta",26.8,46,-18,22],["Jadran",41.8,45.4,13.6,19.8],["Jonsko",37.9,40.5,18.2,21.6],["Italija",37.8,44.6,8.6,18.6],["Korzika i Baleari",38.4,44.6,0.6,10.6],["Španjolska i Maroko",35.4,39.8,-6.6,1.8],["Atlantik i Kanari",27.5,36.4,-17.4,-5]];
+{const la=S.map(x=>x[1]),lo=S.map(x=>x[2]);REG[0]=["Cijela ruta",Math.min(...la)-1.5,Math.max(...la)+1.5,Math.min(...lo)-2,Math.max(...lo)+2];} // uvijek cijela ruta, gdje god bila
 const rb=document.getElementById("regions");
 REG.forEach((r,i)=>{const b=document.createElement("button");b.textContent=r[0];b.setAttribute("aria-pressed",i===0);b.onclick=()=>{rb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));fit(r[1],r[2],r[3],r[4]);};rb.appendChild(b);});
 const unpress=()=>rb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));
@@ -666,7 +690,7 @@ function pick(i){
 document.getElementById("igo").onclick=()=>{const k=doy(S[sel][4]);let best=entries[0];for(const e of entries)if(Math.abs(e.k-k)<Math.abs(best.k-k)||(Math.abs(e.k-k)===Math.abs(best.k-k)&&e.k<=k))best=e;
   best.el.scrollIntoView({block:"center"});best.el.animate&&best.el.animate([{outline:"2px solid var(--track)"},{outline:"2px solid transparent"}],{duration:1600});};
 box.addEventListener("click",e=>{if(moved>4||e.target.closest(".stop,.info,button"))return;info.hidden=true;stops.forEach(o=>o.g.classList.remove("sel"));apply();});
-const start=()=>fit(26.8,46,-18,22);
+const start=()=>fit(REG[0][1],REG[0][2],REG[0][3],REG[0][4]);
 new ResizeObserver(()=>{const cx=vb.x+vb.w/2,cy=vb.y+vb.h/2;vb.h=vb.w*BH()/BW();vb.x=cx-vb.w/2;vb.y=cy-vb.h/2;clamp();apply();}).observe(box);
 start();
 
