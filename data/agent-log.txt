@@ -20,3 +20,4 @@
 2026-11-19 14:49 (Zagreb) | GitHub | broj zapisa u E: 178 | zadnji zapis: 19.11 07:00 | zapisa bez punog teksta: 0 | Facebook zadatak: uključen
 2026-11-19 16:48 (Zagreb) | GitHub | broj zapisa u E: 178 | zadnji zapis: 19.11 07:00 | zapisa bez punog teksta: 0 | Facebook zadatak: uključen
 2026-11-19 18:48 (Zagreb) | GitHub | broj zapisa u E: 178 | zadnji zapis: 19.11 07:00 | zapisa bez punog teksta: 0 | Facebook zadatak: uključivanje nije uspjelo (bio isključen, device_absent; update_trigger: u zakazanom pokretanju potrebno je odobrenje korisnika)
+2026-11-19 20:49 (Zagreb) | GitHub | broj zapisa u E: 178 | zadnji zapis: 19.11 07:00 | zapisa bez punog teksta: 0 | Facebook zadatak: uključivanje nije uspjelo (bio isključen, device_absent; update_trigger: u zakazanom pokretanju potrebno je odobrenje korisnika)
